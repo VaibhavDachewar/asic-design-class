@@ -1,6 +1,7 @@
-LAB1 -
+ASIC DESIGN CLASS LABS
 
-TASK1 - Create a C program and compile it using GCC and then verify the output.
+
+LAB 1a - Create a C program and compile it using GCC and then verify the output.
 
 Steps to be followed -
 
@@ -19,7 +20,7 @@ Steps to be followed -
 Conclusion - Hence after succesfully executing c code we get sum of first 100 numbers as 5050.
 
 
-Task 2 - Compiling a C code on  RISC_V compiler using O1 and Ofast.
+LAB 1b - Compiling a C code on  RISC_V compiler using O1 and Ofast.
 
 Steps to be followed -
 
@@ -46,3 +47,31 @@ Steps to be followed -
 
 Conclusion - Hence the compilation is successfully performed.
 
+LAB 2 - Compiling the C code with RISC-V compiler using spike simulator and debugging it.
+
+Steps to be followed -
+
+1] After compiling the sum1ton.c file using gcc compiler we got result as 5050. Now for verifying for same result using risc-v compiler use spike simulator and to get result use the command spike pk sum1ton.o 
+
+![1](https://github.com/user-attachments/assets/c890e1e3-2060-4ab7-bfc8-bcac285c685d)
+
+We get same result as 5050
+
+2] Now to open debugger use "spike -d pk" command and to execute from 0 to first address of main section use "until pc 0 100b0 " where 0 is the initial and 100b0 is the first address under main section.
+
+![2](https://github.com/user-attachments/assets/64e492dc-c68a-4898-bddc-7387e59d88ed)
+
+
+3] TO check content of a2 register use "reg 0 a2" command. After executing it's content will be displayed. To go to the next instruction just press enter.
+
+![3](https://github.com/user-attachments/assets/29fb83c7-4a7a-46c5-a2d9-fb5db9b953db)
+
+4] As we can see the next instruction is "lui" which is used to load immediate. After executing it use "reg 0 a2" command and here we can observe that it's content is changed
+
+![4](https://github.com/user-attachments/assets/7a7800da-a458-4ccc-a603-7a80c4c05d22)
+
+5] Now moving to next instruction i.e "sp" stack pointer; after executing it we can observe hexadecimal 10 got subtracted i.e from 50 to 40.
+
+![Screenshot (793)](https://github.com/user-attachments/assets/f7e12f2b-f0d5-4c51-85dc-419c7de18fb6)
+
+Hence in similar way we can perform succeeding instructions.
