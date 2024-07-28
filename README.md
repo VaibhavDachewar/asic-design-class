@@ -103,10 +103,20 @@ LAB-3A] Identify various RISC-V instruction type (R, I, S, B, U, J) and exact 32
 
 LAB-3B] By making use of RISCV Core: Verilog Netlist and Testbench, perform an experiment of Functional Simulation.
 
+
+
+
 From below we can see all instructions are Hardcoded. 
 
 
+
 ![9](https://github.com/user-attachments/assets/d8d022bc-67a7-4795-83d4-e19007f7a0fd)
+
+
+To compile and to get gtkwave of the iiitb_rv32i.v file and it's testbench iiitb_rv32i_tb.v file use below commands : 
+
+
+![10](https://github.com/user-attachments/assets/c2183c7e-c878-4267-a506-04cf026595a8)
 
 
 Table to show standard risc-v isa and Hardcore isa for each operation :
