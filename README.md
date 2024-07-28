@@ -103,34 +103,68 @@ LAB-3A] Identify various RISC-V instruction type (R, I, S, B, U, J) and exact 32
 
 LAB-3B] By making use of RISCV Core: Verilog Netlist and Testbench, perform an experiment of Functional Simulation.
 
-| Instruction        | Hardcoded ISA |
-|--------------------|---------------|
-| ADD R6, R2, R1     | 32'h02208300  |
-| SUB R7, R1, R2     | 32'h02209380  |
-| AND R8, R1, R3     | 32'h0230a400  |
-| OR R9, R2, R5      | 32'h02513480  |
-| XOR R10, R1, R4    | 32'h0240c500  |
-| SLT R1, R2, R4     | 32'h02415580  |
-| ADDI R12, R4, 5    | 32'h00520600  |
-| BEQ R0, R0, 15     | 32'h00f00002  |
-| SW R3, R1, 2       | 32'h00209181  |
-| LW R13, R1, 2      | 32'h00208681  |
-| SRL R16, R14, R2   | 32'h00271803  |
-| SLL R15, R1, R2    | 32'h00208783  |
+From below we can see all instructions are Hardcoded. 
 
 
-|Instruction        |Standard RISC-V ISA|
-|-------------------|-------------------|
-|ADD r8, r9, r10    | 32'h00A292B3|
-|SUB r10, r8, r9    | 32'h40A292B3|
-|AND r9, r8, r10    | 32'h00A2AEB3|
-|OR r8, r9, r5      | 32'h00A293B3|
-|XOR r8, r8, r4     | 32'h00A284B3|
-|SLT r00, r1, r4    | 32'h00A10133|
-|ADDI r02, r2, 5    | 32'h00520213|
-|SW r2, r0, 4       | 32'h00420223|
-|SRL r06, r01, r1   | 32'h000323B3|
-|BNE r0, r0, 20     | 32'h00A00313|
-|BEQ r0, r0, 15     | 32'h00F00313|
-|LW r03, r01, 2     | 32'h00212183|
-|SLL r05, r01, r1   | 32'h000282B3|
+![9](https://github.com/user-attachments/assets/d8d022bc-67a7-4795-83d4-e19007f7a0fd)
+
+
+Table to show standard risc-v isa and Hardcore isa for each operation :
+
+
+| Operation          | Standard RISCV ISA | Hardcoded ISA |
+|--------------------|---------------------|---------------|
+| ADD R6, R2, R1     | 32'h00110333        | 32'h02208300  |
+| SUB R7, R1, R2     | 32'h402083b3        | 32'h02209380  |
+| AND R8, R1, R3     | 32'h0030f433        | 32'h0230a400  |
+| OR R9, R2, R5      | 32'h005164b3        | 32'h02513480  |
+| XOR R10, R1, R4    | 32'h0040c533        | 32'h0240c500  |
+| SLT R1, R2, R4     | 32'h0045a0b3        | 32'h02415580  |
+| ADDI R12, R4, 5    | 32'h004120b3        | 32'h00520600  |
+| BEQ R0, R0, 15     | 32'h00000f63        | 32'h00f00002  |
+| SW R3, R1, 2       | 32'h0030a123        | 32'h00209181  |
+| LW R13, R1, 2      | 32'h0020a683        | 32'h00208681  |
+| SRL R16, R14, R2   | 32'h0030a123        | 32'h00271803  |
+| SLL R15, R1, R2    | 32'h002097b3        | 32'h00208783  |
+
+
+Output waveforms for each instruction -
+
+1] ADD R6, R2, R1  : here addition is performed as R2+R1 and stored in R1 
+
+from below image we can see output of ADD : 00000001 + 00000002 = 00000003
+
+![1](https://github.com/user-attachments/assets/0f3f8435-da39-4420-bb3a-8462f0d65b56)
+
+
+Similarly all instructions are executed and their respective waveforms are recorded
+
+
+2] SUB R7, R1, R2
+
+![2](https://github.com/user-attachments/assets/0b45855b-bf87-43a2-ab9d-86fdcf211f98)
+
+3] AND R8, R1, R3
+
+![3](https://github.com/user-attachments/assets/ff7b5e6c-2a6b-47ff-a766-56dd5cba9d9f)
+
+4] OR R9, R2, R5
+
+![4](https://github.com/user-attachments/assets/d920063c-d861-449b-98c6-f3842716b6ef)
+
+5] XOR R10, R1, R4
+
+![5](https://github.com/user-attachments/assets/72648356-f4fe-45ba-9d04-1ee9f1106071)
+
+6] SLT R1, R2, R4
+
+![6](https://github.com/user-attachments/assets/e163b617-7689-4dba-8d8a-09c410385e6e)
+
+7] ADDI R12, R4, 5
+
+![7](https://github.com/user-attachments/assets/f8871143-418f-45fa-beb7-d2b9c554dcba)
+
+8] BEQ R0, R0, 15
+
+![8](https://github.com/user-attachments/assets/6bf61cab-2f26-4b64-98db-259339a51666)
+
