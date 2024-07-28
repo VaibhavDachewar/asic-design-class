@@ -101,4 +101,20 @@ LAB-3A] Identify various RISC-V instruction type (R, I, S, B, U, J) and exact 32
 | `LW r3, r1, 2`       | I    | 0000011 |        |      | 00001| 010    | 00011| 000000000010 | 000000000010 00001 010 00011 0000011 |
 | `SLL r5, r1, r1`     | R    | 0110011 | 0000000| 00001| 00001| 001    | 00101|       | 0000000 00001 00001 001 00101 0110011 |
 
+RISC-V instructions and their corresponding hexadecimal representations:
 
+|Instruction       |Hexadecimal|
+|-------------------|-------------------|
+|ADD r8, r9, r10    | 0x00A4A033|
+|SUB r10, r8, r9    | 0x40A4A533|
+|AND r9, r8, r10    | 0x00A4A233|
+|OR r8, r9, r5      | 0x0054A033|
+|XOR r8, r8, r4     | 0x0044A033|
+|SLT r00, r1, r4    | 0x00408033|
+|ADDI r02, r2, 5    | 0x00510113|
+|SW r2, r0, 4       | 0x00412023|
+|SRL r06, r01, r1   | 0x00129233|
+|BNE r0, r0, 20     | 0x01400063|
+|BEQ r0, r0, 15     | 0x00F00063|
+|LW r03, r01, 2     | 0x00212083|
+|SLL r05, r01, r1   | 0x00129133|
