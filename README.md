@@ -101,20 +101,36 @@ LAB-3A] Identify various RISC-V instruction type (R, I, S, B, U, J) and exact 32
 | `LW r3, r1, 2`       | I    | 0000011 |        |      | 00001| 010    | 00011| 000000000010 | 000000000010 00001 010 00011 0000011 |
 | `SLL r5, r1, r1`     | R    | 0110011 | 0000000| 00001| 00001| 001    | 00101|       | 0000000 00001 00001 001 00101 0110011 |
 
-RISC-V instructions and their corresponding hexadecimal representations:
+LAB-3B] By making use of RISCV Core: Verilog Netlist and Testbench, perform an experiment of Functional Simulation.
 
-|Instruction       |Hexadecimal|
+| Instruction        | Hardcoded ISA |
+|--------------------|---------------|
+| ADD R6, R2, R1     | 32'h02208300  |
+| SUB R7, R1, R2     | 32'h02209380  |
+| AND R8, R1, R3     | 32'h0230a400  |
+| OR R9, R2, R5      | 32'h02513480  |
+| XOR R10, R1, R4    | 32'h0240c500  |
+| SLT R1, R2, R4     | 32'h02415580  |
+| ADDI R12, R4, 5    | 32'h00520600  |
+| BEQ R0, R0, 15     | 32'h00f00002  |
+| SW R3, R1, 2       | 32'h00209181  |
+| LW R13, R1, 2      | 32'h00208681  |
+| SRL R16, R14, R2   | 32'h00271803  |
+| SLL R15, R1, R2    | 32'h00208783  |
+
+
+|Instruction        |Standard RISC-V ISA|
 |-------------------|-------------------|
-|ADD r8, r9, r10    | 0x00A4A033|
-|SUB r10, r8, r9    | 0x40A4A533|
-|AND r9, r8, r10    | 0x00A4A233|
-|OR r8, r9, r5      | 0x0054A033|
-|XOR r8, r8, r4     | 0x0044A033|
-|SLT r00, r1, r4    | 0x00408033|
-|ADDI r02, r2, 5    | 0x00510113|
-|SW r2, r0, 4       | 0x00412023|
-|SRL r06, r01, r1   | 0x00129233|
-|BNE r0, r0, 20     | 0x01400063|
-|BEQ r0, r0, 15     | 0x00F00063|
-|LW r03, r01, 2     | 0x00212083|
-|SLL r05, r01, r1   | 0x00129133|
+|ADD r8, r9, r10    | 32'h00A292B3|
+|SUB r10, r8, r9    | 32'h40A292B3|
+|AND r9, r8, r10    | 32'h00A2AEB3|
+|OR r8, r9, r5      | 32'h00A293B3|
+|XOR r8, r8, r4     | 32'h00A284B3|
+|SLT r00, r1, r4    | 32'h00A10133|
+|ADDI r02, r2, 5    | 32'h00520213|
+|SW r2, r0, 4       | 32'h00420223|
+|SRL r06, r01, r1   | 32'h000323B3|
+|BNE r0, r0, 20     | 32'h00A00313|
+|BEQ r0, r0, 15     | 32'h00F00313|
+|LW r03, r01, 2     | 32'h00212183|
+|SLL r05, r01, r1   | 32'h000282B3|
