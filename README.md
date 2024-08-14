@@ -1,7 +1,7 @@
 ASIC DESIGN CLASS LABS
 
 
-LAB 1a - Create a C program and compile it using GCC and then verify the output.
+***LAB 1a - Create a C program and compile it using GCC and then verify the output.***
 
 Steps to be followed -
 
@@ -20,7 +20,7 @@ Steps to be followed -
 Conclusion - Hence after succesfully executing c code we get sum of first 100 numbers as 5050.
 
 
-LAB 1b - Compiling a C code on  RISC_V compiler using O1 and Ofast.
+***LAB 1b - Compiling a C code on  RISC_V compiler using O1 and Ofast.***
 
 Steps to be followed -
 
@@ -47,7 +47,7 @@ Steps to be followed -
 
 Conclusion - Hence the compilation is successfully performed.
 
-LAB 2 - Compiling the C code with RISC-V compiler using spike simulator and debugging it.
+***LAB 2 - Compiling the C code with RISC-V compiler using spike simulator and debugging it.***
 
 Steps to be followed -
 
@@ -78,9 +78,9 @@ We get same result as 5050
 Hence in similar way we can perform succeeding instructions.
 
 
-LAB 3
+***LAB 3***
 
-LAB-3A] Identify various RISC-V instruction type (R, I, S, B, U, J) and exact 32-bit instruction code in the instruction type format for below RISC-V instructions
+***LAB-3A] Identify various RISC-V instruction type (R, I, S, B, U, J) and exact 32-bit instruction code in the instruction type format for below RISC-V instructions***
 
 
 ### Instructions Table
@@ -101,7 +101,8 @@ LAB-3A] Identify various RISC-V instruction type (R, I, S, B, U, J) and exact 32
 | `LW r3, r1, 2`       | I    | 0000011 |        |      | 00001| 010    | 00011| 000000000010 | 000000000010 00001 010 00011 0000011 |
 | `SLL r5, r1, r1`     | R    | 0110011 | 0000000| 00001| 00001| 001    | 00101|       | 0000000 00001 00001 001 00101 0110011 |
 
-LAB-3B] By making use of RISCV Core: Verilog Netlist and Testbench, perform an experiment of Functional Simulation.
+
+***LAB-3B] By making use of RISCV Core: Verilog Netlist and Testbench, perform an experiment of Functional Simulation.***
 
 
 
@@ -177,4 +178,157 @@ Similarly all instructions are executed and their respective waveforms are recor
 8] BEQ R0, R0, 15
 
 ![8](https://github.com/user-attachments/assets/6bf61cab-2f26-4b64-98db-259339a51666)
+
+
+
+***LAB-4] Create a "TO-DO LIST APPLICATION" in C and compile with gcc and Risc-V architecture compilers and verify the output.***
+
+
+C program for "TO-DO-LIST APPLICATION":
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_TASKS 100
+#define TASK_LENGTH 100
+
+typedef struct {
+    char task[TASK_LENGTH];
+    int is_done;
+} Todo;
+
+Todo todo_list[MAX_TASKS];
+int task_count = 0;
+
+void add_task() {
+    if (task_count < MAX_TASKS) {
+        printf("Enter the task: ");
+        getchar(); // To consume the newline character from the previous input
+        fgets(todo_list[task_count].task, TASK_LENGTH, stdin);
+        todo_list[task_count].task[strcspn(todo_list[task_count].task, "\n")] = 0; // Remove newline character
+        todo_list[task_count].is_done = 0;
+        task_count++;
+        printf("Task added successfully!\n");
+    } else {
+        printf("Task list is full!\n");
+    }
+}
+
+void view_tasks() {
+    if (task_count == 0) {
+        printf("No tasks to display.\n");
+        return;
+    }
+    for (int i = 0; i < task_count; i++) {
+        printf("%d. [%c] %s\n", i + 1, todo_list[i].is_done ? 'x' : ' ', todo_list[i].task);
+    }
+}
+
+void mark_task_done() {
+    int task_num;
+    printf("Enter the task number to mark as done: ");
+    scanf("%d", &task_num);
+    if (task_num > 0 && task_num <= task_count) {
+        todo_list[task_num - 1].is_done = 1;
+        printf("Task marked as done.\n");
+    } else {
+        printf("Invalid task number.\n");
+    }
+}
+
+int main() {
+    int choice;
+    while (1) {
+        printf("\nTo-Do List Application\n");
+        printf("1. Add Task\n");
+        printf("2. View Tasks\n");
+        printf("3. Mark Task as Done\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                add_task();
+                break;
+            case 2:
+                view_tasks();
+                break;
+            case 3:
+                mark_task_done();
+                break;
+            case 4:
+                printf("Exiting the application.\n");
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+}
+```
+
+
+Compilation with gcc -
+
+
+![1](https://github.com/user-attachments/assets/bddcc84d-03eb-4979-b091-72a4ae171ec8)
+
+
+Output can be observed as -
+
+![2 (2)](https://github.com/user-attachments/assets/4ff6582c-3602-4a06-b800-7bb2dadb215f)
+
+![Screenshot 2024-08-14 100416](https://github.com/user-attachments/assets/b295809e-e020-4021-b446-a1707f8dbd82)
+
+![4](https://github.com/user-attachments/assets/f7f9cb89-f68d-41c8-9144-45238147aed3)
+
+
+**Compiling the C code in RISC-V architecture with O1 and Ofast switches -**
+
+
+A] Executing the C code with O1 switch with below command in terminal -
+
+
+![5](https://github.com/user-attachments/assets/8893df1d-a763-4e3f-a4d3-c51457e29b1e)
+
+
+The assembly line code for the O1 switch can be observed as below -
+
+
+![6](https://github.com/user-attachments/assets/625df460-7a1d-457a-92c7-e77f62cf88c0)
+
+
+B] Executing the C code with with Ofast switch -
+
+
+![7](https://github.com/user-attachments/assets/a590b975-b548-49a4-bc79-8b4a32f33ce1)
+
+
+The assembly line code, after executing the C code with Ofast switch can be observed as below-
+
+
+![8](https://github.com/user-attachments/assets/a0731e9a-bec5-47bc-b43a-4fd44867a7d2)
+
+
+For verifying for same result using risc-v architecture use spike simulator -
+
+``spike pk todolist.o ``
+
+
+![9](https://github.com/user-attachments/assets/71d46768-c6ca-4670-a9a1-b91ba738ebaf)
+
+
+Now to open debugger use ``spike -d pk todolist.c`` command and to execute from 0 to first address of main section use ``until pc 0 103cc`` where 0 is the initial and 103cc is the first address under main section.
+
+
+![10](https://github.com/user-attachments/assets/dc5e357e-3abc-4bee-96aa-9c9358a9bb84)
+
+
+
+Observation - After compiling the "TO-DO-LIST APPLICATION" C program with gcc compiler and RISC-V architecture uising O1 and Ofast switches; same output is observed.
+
+
+![11](https://github.com/user-attachments/assets/177f81b3-a8d2-4eee-ac07-9d6ebf148c1b)
+
 
