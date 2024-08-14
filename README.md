@@ -181,6 +181,8 @@ Similarly all instructions are executed and their respective waveforms are recor
 
 
 
+
+
 ***LAB-4] Create a "TO-DO LIST APPLICATION" in C and compile with gcc and Risc-V architecture compilers and verify the output.***
 
 
