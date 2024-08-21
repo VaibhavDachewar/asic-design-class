@@ -334,3 +334,80 @@ Observation - After compiling the "TO-DO-LIST APPLICATION" C program with gcc co
 ![11](https://github.com/user-attachments/assets/177f81b3-a8d2-4eee-ac07-9d6ebf148c1b)
 
 
+
+
+***LAB 5] Build a 5-stage pipelined RISC-V processor using TL verilog and Makerchip***
+
+
+Enabeling the Visualisation for the pipelined cpu in makerchip - 
+
+
+![1](https://github.com/user-attachments/assets/ff0ba0a6-c788-4495-bb6f-fb4676e52bd5)
+
+![2](https://github.com/user-attachments/assets/68c0bf00-3dc1-4b26-b2ee-0659cc255a8e)
+
+
+Appending the Fetch using PC Logic and Adding the instruction memory - 
+
+![3](https://github.com/user-attachments/assets/eccfa195-6e20-4216-af66-a51439a5faab)
+
+Decoding I,R,S,U,B,J type of instructions based on opcode [6:0]
+Only [6:2] is used here because this implementation is for RV64I which does not use [1:0] - 
+
+
+![4](https://github.com/user-attachments/assets/bd2e98f5-03bd-467f-92ba-442d8813a1ac)
+
+
+Adding a unique name to the clock with ```$clk_vai = *clk``` - 
+
+
+![5](https://github.com/user-attachments/assets/49fcd8cb-4339-4de9-afad-fbcf0e109f6a)
+
+
+Instruction immediate value decode - 
+
+
+![8](https://github.com/user-attachments/assets/d49f42ea-f2f1-45f2-8e84-ff24a2125e1b)
+
+
+Decoding other fields of instruction (source and destination registers, funct, opcode) using valid -
+
+
+![9](https://github.com/user-attachments/assets/4203ad52-f6a3-404d-a4f7-dafa5344d40f)
+
+
+Decode instruction in subset of base instruction set based on RISC-V 32I 
+
+Use the command to decode - ```$dec_bits[10:0] = {$funct7[5],$funct3,$opcode}```
+
+Decoding individual branch instructions - 
+
+
+![10](https://github.com/user-attachments/assets/3f665bc6-bfbe-4326-b3b2-9a052e274fc2)
+
+To quite down warnings - ``` `BOGUS_USE($is_beq $is_bne $is_blt $is_bge $is_bltu $is_bgeu $is_addi $is_add)``` is added to the TLV code
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
