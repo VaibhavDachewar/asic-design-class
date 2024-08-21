@@ -387,6 +387,68 @@ Decoding individual branch instructions -
 
 To quite down warnings - ``` `BOGUS_USE($is_beq $is_bne $is_blt $is_bge $is_bltu $is_bgeu $is_addi $is_add)``` is added to the TLV code
 
+**Register file Read and Write**
+
+Here the Register file is 2 read, 1 write which means 2 read and 1 write operation can happen simultanously.
+
+For changes on Register File Read assign ``$scr1/2_value[31:0]`` to register file outputs.
+
+
+![11](https://github.com/user-attachments/assets/78fa9d26-3d74-4644-b52d-83434f3edee5)
+
+**ALU**
+During the execute stage at ALU, both the operands perform the operation based on opcode. The output of ALU can be observed at `Sresult` .
+
+Below is snapshot from Makerchip IDE after performing the execute stage.
+
+![12](https://github.com/user-attachments/assets/02237119-43f9-4d15-bad1-68a612577f76)
+
+**Register File Write** can be performed as below and it's waveform can be observed -
+
+
+![13](https://github.com/user-attachments/assets/9ae8ddca-a593-410a-8cd0-12692157a3dd)
+
+**Implementing Branch Instructions**
+
+The next stage in the building of the RISC-V microarchitecture, is the addition of branches.
+
+
+![14](https://github.com/user-attachments/assets/0cafd8be-d2cb-4fdf-97ea-a6a0612d0294)
+
+
+For complementing branch instructions use ``$br_target_pc[31:0] = $pc +$imm;`` 
+
+![15](https://github.com/user-attachments/assets/0322dd3f-adc4-482a-b261-8a23c28a9b9e)
+
+**Testbench**
+
+To pass the testbench use - ``*passed = |cpu/xreg[10]>>5$value == (1+2+3+4+5+6+7+8+9);``
+
+From the below snapshot from makerchip, we can observe that the Testbench is successfullt implemented, and we can verify it from the LOG terminal
+
+
+![16](https://github.com/user-attachments/assets/c1ce8a67-3e74-4bbd-b348-db4d618dea14)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
