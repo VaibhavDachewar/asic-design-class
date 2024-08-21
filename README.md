@@ -1,5 +1,7 @@
-ASIC DESIGN CLASS LABS
+# ASIC DESIGN CLASS LABS
 
+<details>
+ <summary>LAB-1 </summary>
 
 ***LAB 1a - Create a C program and compile it using GCC and then verify the output.***
 
@@ -47,6 +49,13 @@ Steps to be followed -
 
 Conclusion - Hence the compilation is successfully performed.
 
+</details>
+
+
+
+<details>
+ <summary>LAB-2 </summary>
+
 ***LAB 2 - Compiling the C code with RISC-V compiler using spike simulator and debugging it.***
 
 Steps to be followed -
@@ -77,7 +86,16 @@ We get same result as 5050
 
 Hence in similar way we can perform succeeding instructions.
 
+</details>
 
+
+
+
+
+<details>
+ <summary>LAB-3 </summary>
+ 
+    
 ***LAB 3***
 
 ***LAB-3A] Identify various RISC-V instruction type (R, I, S, B, U, J) and exact 32-bit instruction code in the instruction type format for below RISC-V instructions***
@@ -180,8 +198,11 @@ Similarly all instructions are executed and their respective waveforms are recor
 ![8](https://github.com/user-attachments/assets/6bf61cab-2f26-4b64-98db-259339a51666)
 
 
+</details>
 
 
+<details>
+ <summary>LAB-4 </summary>
 
 ***LAB-4] Create a "TO-DO LIST APPLICATION" in C and compile with gcc and Risc-V architecture compilers and verify the output.***
 
@@ -334,7 +355,11 @@ Observation - After compiling the "TO-DO-LIST APPLICATION" C program with gcc co
 ![11](https://github.com/user-attachments/assets/177f81b3-a8d2-4eee-ac07-9d6ebf148c1b)
 
 
+</details>
 
+
+<details>
+ <summary>LAB-5 </summary>
 
 ***LAB 5] Build a 5-stage pipelined RISC-V processor using TL verilog and Makerchip***
 
@@ -764,7 +789,7 @@ Gradual addition of 1 to 9 stored in r10 register
    endmodule
 ```
 
-
+</details>
 
 
 
