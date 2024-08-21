@@ -422,12 +422,84 @@ For complementing branch instructions use ``$br_target_pc[31:0] = $pc +$imm;``
 
 **Testbench**
 
-To pass the testbench use - ``*passed = |cpu/xreg[10]>>5$value == (1+2+3+4+5+6+7+8+9);``
+To pass the testbench use - ``*passed = |cpu/xreg[10]>>5$value == (1+2+3+4+5+6+7+8+9+10);``
 
 From the below snapshot from makerchip, we can observe that the Testbench is successfullt implemented, and we can verify it from the LOG terminal
 
 
 ![16](https://github.com/user-attachments/assets/c1ce8a67-3e74-4bbd-b348-db4d618dea14)
+
+
+**Pipelining the RISC-V CPU **
+
+After applying pipeling to the cpu core and including the load,store and data memory option, we can observe the pipelined output at the **visualization** terminal 
+
+![17](https://github.com/user-attachments/assets/31a95dc6-4a69-4904-9602-4d0a3533b6f3)
+
+On the viz tab we can observe execution of various insturents and their results on differnt registers
+
+For the risc-v cpu code , it takes 59 cycles for execution after adding the load,store and jump instructions.
+
+
+![18](https://github.com/user-attachments/assets/c87b2b4f-d2cb-4516-b943-42ae175e2df2)
+
+Below is snapshot of pipelined CPU with a test case of assembly program which does summation from 1 to 9 then stores to r10 of register file. In snapshot r10 = 45.
+
+![19](https://github.com/user-attachments/assets/ce36b6a3-a5ec-477e-b167-995e8c7007c4)
+
+The gradual output of add instruction at 56th cycle  stored in the r10 register can be observed as 
+
+
+![Screenshot 2024-08-21 212517](https://github.com/user-attachments/assets/241221eb-6e2b-43b0-9c92-915e4f1e1bb8)
+
+
+Hence in similar pattern output for other instructions can be analized.
+
+
+***Block diagram of the designed RISC-V CPU***
+
+
+![20](https://github.com/user-attachments/assets/08a9b81d-6e87-4acb-8614-3b586a65d3ee)
+
+
+***Output waveform with clock signal appended with name ``clk_vai``***
+
+![21](https://github.com/user-attachments/assets/2bb47755-9727-446f-91a1-88e105068d65)
+
+
+**Reset signal**
+
+
+![22](https://github.com/user-attachments/assets/776d7794-c8ea-4810-910f-a45190913b6a)
+
+
+Gradual addition of 1 to 9 stored in r10 register
+
+
+![Screenshot 2024-08-21 212517](https://github.com/user-attachments/assets/25971fef-ed90-478c-91e1-db83d45faad9)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
