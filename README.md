@@ -422,6 +422,7 @@ For changes on Register File Read assign ``$scr1/2_value[31:0]`` to register fil
 ![11](https://github.com/user-attachments/assets/78fa9d26-3d74-4644-b52d-83434f3edee5)
 
 **ALU**
+
 During the execute stage at ALU, both the operands perform the operation based on opcode. The output of ALU can be observed at `Sresult` .
 
 Below is snapshot from Makerchip IDE after performing the execute stage.
@@ -455,7 +456,7 @@ From the below snapshot from makerchip, we can observe that the Testbench is suc
 ![16](https://github.com/user-attachments/assets/c1ce8a67-3e74-4bbd-b348-db4d618dea14)
 
 
-**Pipelining the RISC-V CPU **
+**Pipelining the RISC-V CPU**
 
 After applying pipeling to the cpu core and including the load,store and data memory option, we can observe the pipelined output at the **visualization** terminal 
 
@@ -468,9 +469,14 @@ For the risc-v cpu code , it takes 59 cycles for execution after adding the load
 
 ![18](https://github.com/user-attachments/assets/c87b2b4f-d2cb-4516-b943-42ae175e2df2)
 
-Below is snapshot of pipelined CPU with a test case of assembly program which does summation from 1 to 9 then stores to r10 of register file. In snapshot r10 = 45.
+Below is snapshot of pipelined CPU with a test case of assembly program which does summation from 1 to 9 then stores to r14 of register file. In snapshot r14 = 45.
 
-![19](https://github.com/user-attachments/assets/ce36b6a3-a5ec-477e-b167-995e8c7007c4)
+![Screenshot 2024-08-21 225050](https://github.com/user-attachments/assets/14ef33c4-d231-4483-9590-50c15230ab0a)
+
+
+![Screenshot 2024-08-21 225234](https://github.com/user-attachments/assets/b6c445e1-2491-4784-ad81-92badebe5d99)
+
+
 
 The gradual output of add instruction at 56th cycle  stored in the r10 register can be observed as 
 
@@ -498,10 +504,10 @@ Hence in similar pattern output for other instructions can be analized.
 ![22](https://github.com/user-attachments/assets/776d7794-c8ea-4810-910f-a45190913b6a)
 
 
-Gradual addition of 1 to 9 stored in r10 register
+Gradual addition of 1 to 9 stored in r14 register
 
 
-![Screenshot 2024-08-21 212517](https://github.com/user-attachments/assets/25971fef-ed90-478c-91e1-db83d45faad9)
+![Screenshot 2024-08-21 225234](https://github.com/user-attachments/assets/fd7c300d-8db5-4c34-8134-402a9493e71a)
 
 
 
