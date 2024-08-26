@@ -799,6 +799,88 @@ Gradual addition of 1 to 9 stored in r14 register
 </details>
 
 
+<details>
+ <summary>LAB-6 </summary>
+ 
+
+***LAB 6 - Comparision of generated RISC-V processor outputs using Iverilog GTKwave and Makerchip***
+
+**Steps to be followed -** 
+
+1] Execute the below commands on the terminal window for the buildup to converting the tlv file to the required verilog files
+
+```
+ sudo apt install make python python3 python3-pip git iverilog gtkwave
+
+ cd ~
+
+ sudo apt-get install python3-venv
+
+ python3 -m venv .venv
+
+ source ~/.venv/bin/activate
+
+ pip3 install pyyaml click sandpiper-saas
+```
+
+![Screenshot 2024-08-26 222633](https://github.com/user-attachments/assets/499c08ad-0b72-4828-8c8d-c19852704878)
+
+
+
+2] Use of Sandpiper to convert the TL-Verilog file to Verilog file 
+
+![2](https://github.com/user-attachments/assets/ac001acc-9292-4ed9-a0ab-57849a8e6fdc)
+
+3] Now to compile and simulate the generated verilog code for RISC-V design  run the following commands.
+
+```
+ iverilog -o output/pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module
+
+ cd output
+
+ ./pre_synth_sim.out
+```
+
+![4](https://github.com/user-attachments/assets/b21e1941-e23b-4d90-ae72-b461de361323)
+
+4] Now to open the .vcd simulation file through GTKWave use below command 
+
+```
+$ gtkwave pre_synth_sim.vcd
+```
+
+![5](https://github.com/user-attachments/assets/0dcb0f6d-b653-4390-9cac-7e6b25352067)
+
+
+
+5] The generated output waveform is as shown below which includes -
+   (i) Clock signal appended with name - CPU_clk_vai_a0.
+   (ii) reset signal.
+   (iii) 10-bit output showing gradual addition of 1 to 9.
+
+
+  
+![6](https://github.com/user-attachments/assets/ec109a35-ba92-4299-9bb9-3344982e2fdc)
+
+
+  
+
+  6] For comparison we can see the below plot of gradual addition of 1 to 9 which was obtained in the makerchip using TL-verilog code.
+
+![Screenshot 2024-08-26 233637](https://github.com/user-attachments/assets/a5d68ad0-8ede-4044-8c37-c64e82bda863)
+  
+
+</details>
+   
+
+
+
+
+
+
+
+
+
 
 
 
