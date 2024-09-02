@@ -805,7 +805,7 @@ Gradual addition of 1 to 9 stored in r14 register
 
 ***LAB 6 - Comparision of generated RISC-V processor outputs using Iverilog GTKwave and Makerchip***
 
-**Steps to be followed -** 
+***Steps to be followed -***
 
 1] Execute the below commands on the terminal window for the buildup to converting the tlv file to the required verilog files
 
@@ -874,16 +874,48 @@ $ gtkwave pre_synth_sim.vcd
    
 
 
+<details>
+ <summary>LAB-7 </summary>
+
+***LAB 7 - Addition of Peripherals to convert the Digital output to analog output using DAC and PLL.***
+
+PLL (Phase-Locked Loop): A PLL is used to generate stable clock signals from a reference clock. It can also be used to adjust the frequency of the system clock to meet the requirements of the DAC or other peripherals.
+
+DAC (Digital-to-Analog Converter): A DAC converts digital signals into an analog voltage. It requires a clock signal to control the conversion rate. 
+
+***Commands used to run the rvmyth.v file -***
+
+``
+iverilog -o ./pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module/
+``
 
 
+![Screenshot from 2024-09-02 10-40-01](https://github.com/user-attachments/assets/5ee6b9a6-e543-4e23-9996-791e627784aa)
 
 
+After this we dump the ./pre_synth_sim.out file to create the .vcd file using the following command
+
+``
+./pre_synth_sim.out
+``
+
+![Screenshot from 2024-09-02 10-40-24](https://github.com/user-attachments/assets/05c2f587-bdfb-4c8c-bdd3-31ac2a83bb5a)
 
 
+We then run this .vcd file on gtkwave to observe the output
+
+``
+gtkwave pre_synth_sim.vcd
+``
 
 
+![Screenshot from 2024-09-02 10-40-37](https://github.com/user-attachments/assets/19031eba-11ba-4907-be3b-1b0591893f0a)
 
 
+Below is the output for the waveforms:
+
+
+![Screenshot from 2024-09-02 10-38-26](https://github.com/user-attachments/assets/91df9dab-9ea2-4bb7-9f02-fc3b49160ca1)
 
 
 
