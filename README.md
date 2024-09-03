@@ -919,15 +919,15 @@ Below is the output for the waveforms:
 
 
 
+![Screenshot from 2024-09-03 19-26-11](https://github.com/user-attachments/assets/35a36548-89b8-42aa-9453-1a80c85d2f6f)
 
 
 
+![Screenshot from 2024-09-03 19-24-10](https://github.com/user-attachments/assets/79dfc06c-352a-4ea6-b647-da7c317e4ecc)
 
 
 
-
-
-
+![Screenshot from 2024-09-03 19-23-45](https://github.com/user-attachments/assets/11f5160f-8667-49f0-9457-fce42345237b)
 
 
 
