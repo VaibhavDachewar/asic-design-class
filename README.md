@@ -1,7 +1,7 @@
 # ASIC DESIGN CLASS LABS
 
 <details>
- <summary>LAB-1 </summary>
+ <summary> TASK-1 </summary>
 
 ***LAB 1a - Create a C program and compile it using GCC and then verify the output.***
 
@@ -54,7 +54,7 @@ Conclusion - Hence the compilation is successfully performed.
 
 
 <details>
- <summary>LAB-2 </summary>
+ <summary>TASK-2 </summary>
 
 ***LAB 2 - Compiling the C code with RISC-V compiler using spike simulator and debugging it.***
 
@@ -93,7 +93,7 @@ Hence in similar way we can perform succeeding instructions.
 
 
 <details>
- <summary>LAB-3 </summary>
+ <summary>TASK-3 </summary>
  
     
 ***LAB 3***
@@ -202,7 +202,7 @@ Similarly all instructions are executed and their respective waveforms are recor
 
 
 <details>
- <summary>LAB-4 </summary>
+ <summary>TASK-4 </summary>
 
 ***LAB-4] Create a "TO-DO LIST APPLICATION" in C and compile with gcc and Risc-V architecture compilers and verify the output.***
 
@@ -359,7 +359,7 @@ Observation - After compiling the "TO-DO-LIST APPLICATION" C program with gcc co
 
 
 <details>
- <summary>LAB-5 </summary>
+ <summary>TASK-5 </summary>
 
 ***LAB 5] Build a 5-stage pipelined RISC-V processor using TL verilog and Makerchip***
 
@@ -800,7 +800,7 @@ Gradual addition of 1 to 9 stored in r14 register
 
 
 <details>
- <summary>LAB-6 </summary>
+ <summary>TASK-6 </summary>
  
 
 ***LAB 6 - Comparision of generated RISC-V processor outputs using Iverilog GTKwave and Makerchip***
@@ -875,7 +875,7 @@ $ gtkwave pre_synth_sim.vcd
 
 
 <details>
- <summary>LAB-7 </summary>
+ <summary>TASK-7 </summary>
 
 ***LAB 7 - Addition of Peripherals to convert the Digital output to analog output using DAC and PLL.***
 
@@ -930,14 +930,45 @@ Below is the output for the waveforms:
 ![Screenshot from 2024-09-03 19-23-45](https://github.com/user-attachments/assets/11f5160f-8667-49f0-9457-fce42345237b)
 
 
+</details>
+
+
+<details>
+ <summary>TASK-8 </summary>
+
+***TASK-8 - RTL design using Verilog with SKY130 Technology .***
+
+
+**Lab-1**
+
+To setup the installation clone the github repo ```https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git```
+
+![Screenshot from 2024-10-17 22-35-08](https://github.com/user-attachments/assets/802db657-3b57-41cc-bd84-66fff31d022e)
 
 
 
 
+**Lab-2 : Iverilog and GTKWave**
+
+After cloning the github repo we can list the below verilog files along with respective testbench files under verilog_files directory
+
+![Screenshot from 2024-10-17 22-35-15](https://github.com/user-attachments/assets/f09953ee-2a1b-489a-a006-bfc781e1e33b)
+
+![Screenshot from 2024-10-17 22-35-18](https://github.com/user-attachments/assets/47699719-2ae6-4b79-9f5a-b43aa85e073e)
+
+Simulation of ```good_mux.v``` using iverilog and observing waveform using GTKwave
+
+![Screenshot from 2024-10-17 22-41-49](https://github.com/user-attachments/assets/718a4218-7902-40dd-8834-c1deaf34a9fe)
+
+![Screenshot from 2024-10-17 22-42-07](https://github.com/user-attachments/assets/e82b2ab7-eef1-4cc6-94a6-036297def25a)
+
+
+![Screenshot from 2024-10-17 23-34-16](https://github.com/user-attachments/assets/a9295397-b90b-45bf-bc01-9046389ca0fd)
 
 
 
 
+</details>
 
 
 
