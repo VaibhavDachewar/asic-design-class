@@ -938,6 +938,9 @@ Below is the output for the waveforms:
 
 ***TASK-8 - RTL design using Verilog with SKY130 Technology .***
 
+<details>
+ <summary>Day-1</summary>
+
 
 **Lab-1**
 
@@ -965,6 +968,103 @@ Simulation of ```good_mux.v``` using iverilog and observing waveform using GTKwa
 
 ![Screenshot from 2024-10-17 23-34-16](https://github.com/user-attachments/assets/a9295397-b90b-45bf-bc01-9046389ca0fd)
 
+
+**Lab- 3 : YOSYS**
+
+YOSYS is basically a synthesizer which is used to convert RTL to netlist.
+
+
+After invoking the yosys on terminal we can see the yosys command prompt as-
+
+![Screenshot from 2024-10-19 16-53-50](https://github.com/user-attachments/assets/0e404e32-8d10-4491-99b4-5b135bf7b8af)
+
+
+Now to read the library use the command ``read_liberty -lib`` and to read the good_mux.v verilog file use the command ``read_verilog good_mux.v``
+
+![Screenshot from 2024-10-19 17-32-48](https://github.com/user-attachments/assets/d9ebc649-c4a3-449b-af5d-52d6896db7e0)
+
+
+After reading the verilog file we need to perform synthesis on the good_mux.v verilog file.
+To do so use the command  - ``synth -top good_mux``
+
+After executing SYNTH on good_mux we can observe the following as result-
+
+
+![Screenshot from 2024-10-19 17-39-01](https://github.com/user-attachments/assets/c731ed33-fb8b-47d1-8642-9f504e44e0cd)
+
+![Screenshot from 2024-10-19 17-39-15](https://github.com/user-attachments/assets/fe726e57-3813-4a22-a897-bf7c42e99117)
+
+![Screenshot from 2024-10-19 17-39-24](https://github.com/user-attachments/assets/93f9389d-e475-4f72-a09b-7102ddd83c8f)
+
+
+![Screenshot from 2024-10-19 17-39-39](https://github.com/user-attachments/assets/111ba700-42fb-42d3-b2a1-5992303ddb04)
+
+
+![Screenshot from 2024-10-19 17-39-52](https://github.com/user-attachments/assets/59cbabbe-e4a7-4e6c-a7fd-5e5f385445f5)
+
+![Screenshot from 2024-10-19 17-40-01](https://github.com/user-attachments/assets/ee1b1616-3482-44e4-a323-5ff3b5e3fb16)
+
+![Screenshot from 2024-10-19 17-40-11](https://github.com/user-attachments/assets/96855d13-7e4e-4201-bed0-c81de414eb3d)
+
+![Screenshot from 2024-10-19 17-40-22](https://github.com/user-attachments/assets/e6d651da-64d3-447a-aef3-c02b20d183e6)
+
+![Screenshot from 2024-10-19 17-40-34](https://github.com/user-attachments/assets/3484e05b-b958-402f-ab06-9514397f9693)
+
+![Screenshot from 2024-10-19 17-40-43](https://github.com/user-attachments/assets/d71d8939-5a73-4f74-8896-af71144d95c1)
+
+![Screenshot from 2024-10-19 17-40-52](https://github.com/user-attachments/assets/78bd7ee8-0213-46bb-8348-ca01ba017953)
+
+![Screenshot from 2024-10-19 17-41-12](https://github.com/user-attachments/assets/cfcf42de-5799-4460-8858-f3fc423da1ca)
+
+
+Hence we have successfully read the liberty file (.lib) and the verilog file(.v)
+
+Now to generate the netlist us the command ``abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib``
+
+Output on terminal can be observed as -
+
+![Screenshot from 2024-10-19 18-13-34](https://github.com/user-attachments/assets/6591881b-5987-4f8e-bcda-91dced9f53e7)
+
+![Screenshot from 2024-10-19 18-13-48](https://github.com/user-attachments/assets/b936c8ea-30fb-4338-a80f-302cea059322)
+
+After analyzing the ABC results we can observe that it has identified 0 internal signal, 3 input signals and 1 output signal.
+
+The following result can be compared from the verilog file of good_mux
+
+![Screenshot from 2024-10-19 18-20-08](https://github.com/user-attachments/assets/e457caef-00c3-45b0-bb93-7aa5372fba6c)
+![Screenshot from 2024-10-19 18-13-48](https://github.com/user-attachments/assets/b936c8ea-30fb-4338-a80f-302cea059322)
+
+To see the logic initialised by the synthesizer use ``show`` command 
+
+
+![Screenshot from 2024-10-19 18-24-29](https://github.com/user-attachments/assets/2478ffe0-952c-4025-bb30-cd7cc196745f)
+
+![Screenshot from 2024-10-19 18-23-14](https://github.com/user-attachments/assets/6f9aa7db-c067-48d7-84a3-991a7b3fa5c4)
+
+
+After seeing the logic used, we need to write the netlist and to write the netlist use the command ``write_verilog good_mux_netlist.v
+`` 
+
+![Screenshot from 2024-10-19 18-35-21](https://github.com/user-attachments/assets/e4d201ad-0f81-4072-abd7-dba911332225)
+
+We can see the generated netlist verilog file as below 
+
+
+![Screenshot from 2024-10-19 18-33-24](https://github.com/user-attachments/assets/f568de9c-dfe8-4216-93e3-cd4aa7ba051e)
+
+
+As we can see alot of information, but our requirement is a simplified netlist.
+To simplify the netlist we need to modify the switch
+
+
+![Screenshot from 2024-10-19 18-35-21](https://github.com/user-attachments/assets/9cf5ca2d-f158-4aee-aa96-6a99e2c039b6)
+
+</details>
+
+<details>
+ <summary>Day-2 </summary>
+
+ aaa
 
 
 
