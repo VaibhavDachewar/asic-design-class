@@ -1236,7 +1236,7 @@ endmodule
 
 The flat netlist is being generated to flatten out or avoid all the hierarchies generated in the Hierarchical netlist.
 
-Use of ``flatenn`` to write a flat netlist.
+Use of ``flaten`` to write a flat netlist.
 
 ![Screenshot from 2024-10-19 20-33-23](https://github.com/user-attachments/assets/08e27578-5ea4-4673-8212-34f8b60a029a)
 
@@ -1292,11 +1292,315 @@ module multiple_modules(a, b, c, y);
 endmodule
 ```
 
-By comparing the flat netlist with that of Hierarchical netlist we can observe that all the sub_modules has ben flatten out.
+By comparing the flat netlist with that of Hierarchical netlist we can observe that all the sub_modules has ben flatten out in the flat netlist.
+We can observe direct instatntiation of AND and OR gates.
 
 
-![Screenshot from 2024-10-19 20-37-34](https://github.com/user-attachments/assets/1b5d94ca-9f01-4346-96bc-ad3a29102ac0)
+![Screenshot from 2024-10-20 10-47-16](https://github.com/user-attachments/assets/1df8f8f0-476f-4e7c-bc1d-eca60f760b35)
 
+
+Generated flatten netlist circuit - 
+
+![Screenshot from 2024-10-20 11-04-33](https://github.com/user-attachments/assets/9cb86c42-7178-4cfe-a317-02fccb24fc1f)
+
+
+***Sub-module level synthesis***
+
+Synthesizing the sub_module1 i.e. u1 of the multiple_modules.v :
+
+To synthesize the sub_module1 i.e. u1 use the below commands :
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog multiple_modules.v
+4. synth -top sub_module1
+5. abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+6. show
+```
+
+The terminal output can be observed as -
+
+![Screenshot from 2024-10-20 11-16-08](https://github.com/user-attachments/assets/de3693c9-d615-4f4e-b175-8d0cc7299e92)
+
+![Screenshot from 2024-10-20 11-16-57](https://github.com/user-attachments/assets/16b5f471-35f9-4287-b66e-e7ec1b29d470)
+
+![Screenshot from 2024-10-20 11-17-11](https://github.com/user-attachments/assets/d8a377f2-eca1-4a9e-b63b-81f044a2902c)
+
+We can observe only sub_module1 stats are obtained:
+
+![Screenshot from 2024-10-20 11-17-20](https://github.com/user-attachments/assets/ba2cff1d-36df-442c-9217-907b473781f1)
+
+
+![Screenshot from 2024-10-20 11-17-45](https://github.com/user-attachments/assets/a8212d91-1ebe-4da2-b6e6-57c69f56bc30)
+
+
+
+![Screenshot from 2024-10-20 11-18-06](https://github.com/user-attachments/assets/033ced51-38fc-4080-b55e-dc4f81f01b14)
+
+
+
+***LAB-5:Various flop coding styles and optimization:***
+
+Simulating the D-FF verilog file with iverilog and observing the output waveform on gtkwave-
+
+Note: All the required verilog files to perform simulation of d-ff are available in the verilog_files directory. 
+
+1] Use of ``Asynchronous_reset:``
+
+Commands to simulate d-ff file :
+
+```
+iverilog dff_asyncres.v tb_dff_asyncres.v
+./a.out
+gtkwave tb_dff_asyncres.vcd
+```
+
+Terminal output -
+
+![Screenshot from 2024-10-20 11-50-05](https://github.com/user-attachments/assets/a01d5c55-858e-4adc-95d7-c25c1248b0e0)
+
+GTK-waveform:
+
+![Screenshot from 2024-10-20 11-50-33](https://github.com/user-attachments/assets/9a924ec5-4e5e-4e5d-95a6-91f07d972ab6)
+
+Observation : As soon as asynchronous_reset goes high (1), the output "q" for d-ff goes low(0) independent of posedge or negedge of clock.
+
+2] Use of ``Asynchronous_set:``
+
+Commands to simulate d-ff file with asynchronous_set :
+
+```
+iverilog dff_async_set.v tb_dff_async_set.v
+./a.out
+gtkwave tb_dff_async_set.vcd
+```
+
+Terminal output - 
+
+![Screenshot from 2024-10-20 11-59-41](https://github.com/user-attachments/assets/0497ae9a-0778-434e-8d53-96430cab1362)
+
+GTK-waveform:
+
+![Screenshot from 2024-10-20 12-00-13](https://github.com/user-attachments/assets/224dbdb0-3abf-4543-82af-a1de43b3d0d7)
+
+
+Observation : As long as asynchronous_set goes high (1), the output "q" for d-ff goes high(1) independent of posedge or negedge of clock and irrespective of input "d".
+
+
+2] Use of ``Ssynchronous_reset:``
+
+Commands to simulate d-ff file with synchronous_reset :
+
+```
+iverilog dff_syncres.v tb_dff_syncres.v
+./a.out
+gtkwave tb_dff_syncres.vcd
+```
+
+Terminal output - 
+
+![Screenshot from 2024-10-20 12-16-01](https://github.com/user-attachments/assets/ab1d8859-fd17-4370-ada1-45f2df49edb2)
+
+GTK-waveform:
+
+![Screenshot from 2024-10-20 12-16-17](https://github.com/user-attachments/assets/0d993748-7807-4227-863c-9197fd98c740)
+
+
+Observation : Unlike for asynchronous_reset where output "q" goes low when asynchronous_reset goes high irrespective of clock;
+              here for synchronous_reset, the output "q" doesn't immediately goes low as soon as synchronous_reset goes high instead it waits for the next posedge of clock 	      to rest the output value to low(0).
+
+
+**Synthesis of D-FF verilog files( Asynchronous Reset, Asynchronous Set and Synchronous Reset. ) with use of YOSYS synthesizer**
+
+1] Asynchronous reset:
+
+Commands to perform synthesis on D-FF with asynchronous reset:
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog dff_asyncres.v
+4. synth -top dff_asyncres
+5. dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+8. write_verilog -noattr dff_asyncres_netlist.v
+9. !gvim dff_asyncres_netlist.v
+```
+
+Generated netlist:
+
+![Screenshot from 2024-10-20 12-50-32](https://github.com/user-attachments/assets/bf143441-f049-4617-895b-bb5507e77f31)
+
+
+Terminal output -
+
+![Screenshot from 2024-10-20 12-48-33](https://github.com/user-attachments/assets/af9efe4f-5197-4340-b1b1-52cef2ee42b5)
+
+
+  ![Screenshot from 2024-10-20 12-48-57](https://github.com/user-attachments/assets/9ebd51c6-d035-4178-bf25-0df39455ed9c)
+  
+   ![Screenshot from 2024-10-20 12-49-20](https://github.com/user-attachments/assets/5fbfcd13-df9e-473b-bfdd-f61ad8f84e65)
+
+
+![Screenshot from 2024-10-20 12-49-35](https://github.com/user-attachments/assets/458f1965-b36f-4a19-a696-0e28254b2751)
+
+Generated netlist circuit:
+
+
+![Screenshot from 2024-10-20 12-50-46](https://github.com/user-attachments/assets/e6cfc96a-f0dd-4edc-8f1a-c0d0a035c7b9)
+
+
+2] Asynchronous set:
+
+Commands to perform synthesis on D-FF with asynchronous set:
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog dff_async_set.v
+4. synth -top dff_async_set
+5. dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+8. write_verilog -noattr dff_async_set_netlist.v
+9. !gvim dff_async_set_netlist.v
+
+```
+
+Generated netlist :
+![Screenshot from 2024-10-20 13-03-34](https://github.com/user-attachments/assets/259e922b-63ba-4d20-ba53-02d34a93731e)
+
+
+generated circuit for netlist:
+
+
+![Screenshot from 2024-10-20 13-03-22](https://github.com/user-attachments/assets/3e058835-e10b-47f8-b62b-b329773e6980)
+
+
+Terminal output:
+
+![Screenshot from 2024-10-20 13-02-39](https://github.com/user-attachments/assets/2d35553d-f76d-43e8-8f06-426a7fda93e8)
+
+
+![Screenshot from 2024-10-20 13-02-51](https://github.com/user-attachments/assets/44b5789e-de66-477a-aba7-ceb72c766f95)
+
+
+![Screenshot from 2024-10-20 13-03-04](https://github.com/user-attachments/assets/98df7e29-5dfe-458c-adcd-9eb37a70afd2)
+
+
+
+3] Synchronous reset:
+
+Commands to perform synthesis on D-FF with synchronous reset:
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog dff_syncres.v
+4. synth -top dff_syncres
+5. dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+8. write_verilog -noattr dff_syncres_netlist.v
+9. !gvim dff_syncres_netlist.v
+```
+
+Generated netlist:
+
+![Screenshot from 2024-10-20 13-14-44](https://github.com/user-attachments/assets/971c74e4-bb47-4008-94d2-12141489bd42)
+
+Gcircuit for netlist:
+
+![Screenshot from 2024-10-20 13-14-29](https://github.com/user-attachments/assets/f0fb98be-b473-40da-bc44-fef2a72c8105)
+
+Terminal output:
+
+![Screenshot from 2024-10-20 13-13-39](https://github.com/user-attachments/assets/e2f700e4-7671-4579-9921-4ed27094ef68)
+
+
+![Screenshot from 2024-10-20 13-14-00](https://github.com/user-attachments/assets/424c6bd7-f235-4c5e-b6cd-5475191a140e)
+
+
+![Screenshot from 2024-10-20 13-14-22](https://github.com/user-attachments/assets/8853e6ff-b056-4b75-bd94-57e25b2ef041)
+
+
+
+***LAB-6: Interesting optimizations on mult_2.v and mult_9.v files ***
+
+
+Note: The verilog files used are present in the verilog_files directory of sky130-workshop.
+
+
+Commands to synthesize mult_2.v :
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog mult_2.v
+4. synth -top mul2
+5. abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+6. show
+7. write_verilog -noattr mul2_net.v
+8. !gvim mul2_net.v
+```
+
+Generated netlist:
+
+![Screenshot from 2024-10-20 13-35-35](https://github.com/user-attachments/assets/dff299f4-d8c1-43d9-bae4-3d432b8c0cb5)
+
+
+Generated netlist circuit:
+
+
+![Screenshot from 2024-10-20 13-35-47](https://github.com/user-attachments/assets/b86bf676-0232-44e9-92f6-50b4a454f9af)
+
+
+Terminal output:
+
+![Screenshot from 2024-10-20 13-27-12](https://github.com/user-attachments/assets/c5484509-94f1-422e-9687-920731fc0c3f)
+
+
+![Screenshot from 2024-10-20 13-27-42](https://github.com/user-attachments/assets/e9d4bdc4-16dc-45a3-b7f2-551ab4b6ace3)
+
+![Screenshot from 2024-10-20 13-35-26](https://github.com/user-attachments/assets/902dc828-72a5-424d-a502-ea7be24086e9)
+
+
+Observation : Their are 0 memories, 0 memory bits, 0 processes and 0 cells.
+              As a is directly appended with 0, therefore no use of hardware here.
+
+
+
+
+Commands to synthesize mult_8.v :
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog mult_8.v
+4. synth -top mult8
+5. abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+6. show
+7. write_verilog -noattr mult8_net.v
+8. gvim mult8_net.v
+```
+
+Generated netlist:
+
+![Screenshot from 2024-10-20 13-44-27](https://github.com/user-attachments/assets/c83d49a3-d9dc-4e81-8d89-f76210adc155)
+
+
+Generated netlist circuit :
+
+![Screenshot from 2024-10-20 13-44-40](https://github.com/user-attachments/assets/2bc3eea6-4d24-4f5b-82f8-46ee116b835e)
+
+Terminal output:
+
+![Screenshot from 2024-10-20 13-43-40](https://github.com/user-attachments/assets/80764351-4b4b-4022-9ed7-7ac00c3a65ab)
+
+![Screenshot from 2024-10-20 13-43-58](https://github.com/user-attachments/assets/cd0050c5-ae92-431c-80b6-e2c0b45c17f9)
+
+![Screenshot from 2024-10-20 13-44-14](https://github.com/user-attachments/assets/73c5d78b-3dd3-4704-ab1a-90bc209a4270)
+
+Observation : Their are 0 memories, 0 memory bits, 0 processes and 0 cells.
 
 </details>
 
