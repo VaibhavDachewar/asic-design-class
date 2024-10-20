@@ -1832,8 +1832,7 @@ Observation : here, output "q" is always high, irrespective of the state of rese
 
 2.2] Synthesizing the dff_const2.v file:
 
-Commands to perform synthesis on dff_const1.v :
-
+Commands to perform synthesis on dff_const2.v :
 ```
 1. yosys
 2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
@@ -1846,6 +1845,7 @@ Commands to perform synthesis on dff_const1.v :
 Generated synthesized circuit:
 
 
+![Screenshot from 2024-10-20 18-47-45](https://github.com/user-attachments/assets/d3e6cc0a-8f58-4019-89ef-f61eb86b12da)
 
 
 Terminal output-
@@ -1856,21 +1856,421 @@ Terminal output-
 Observation : It is not inferring a flop here as it was doing for the dff_const1 synthesizing.
 
 
+3.1] Simulating dff_const3.v and it's testbench tb_dff_const3.v using iverilog and observing results on gtkwave
 
+![Screenshot from 2024-10-20 18-58-18](https://github.com/user-attachments/assets/597bbf3f-612d-4c40-88f1-bb76b0b191b5)
+
+
+![Screenshot from 2024-10-20 18-58-30](https://github.com/user-attachments/assets/3ef14ea5-fa72-439a-acba-9c662d07eb47)
+
+Observation: As reset signal goes low, output "q1" goes high at next positive edge of clock and simultaneously output "q" goes low and stays as active low(0) till next positive edge of clock signal and changes it's state to high(1).
+
+
+3.2] Synthesizing the dff_const3.v file:
+
+Commands to perform synthesis on dff_const3.v :
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog dff_const3.v
+4. synth -top dff_const3
+5. dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+Generated synthesized circuit: We can observe 2 flops 1st is the reset flop and 2nd is the set flop.
+
+
+![Screenshot from 2024-10-20 19-12-08](https://github.com/user-attachments/assets/8cc1d200-d916-4efc-bec3-363796893112)
+
+Terminal output:
+
+![Screenshot from 2024-10-20 19-10-44](https://github.com/user-attachments/assets/570c1a39-9f4a-4d28-bc24-f53f81819049)
+
+
+![Screenshot from 2024-10-20 19-11-08](https://github.com/user-attachments/assets/a144a047-59f2-4a17-8cd5-c527e69e0d14)
+
+![Screenshot from 2024-10-20 19-11-26](https://github.com/user-attachments/assets/c0e22cc0-6ffc-42b7-8951-3ee7677caf72)
+
+![Screenshot from 2024-10-20 19-11-41](https://github.com/user-attachments/assets/6f6f0936-ff51-4361-8eaa-4f286bea43d1)
+
+
+Observation : We can observe that it is inferring 2 filp-flops.
+
+4.1] Simulating dff_const4.v and it's testbench tb_dff_const4.v using iverilog and observing results on gtkwave
+
+![Screenshot from 2024-10-20 19-31-29](https://github.com/user-attachments/assets/3eb7e18d-a1fa-45a5-a086-0b48c57dabd9)
+
+
+![Screenshot from 2024-10-20 19-31-38](https://github.com/user-attachments/assets/e51d22e1-126b-4bdf-9a4c-c5ef748c384d)
+
+4.2] Synthesizing the dff_const4.v file:
+
+Commands to perform synthesis on dff_const4.v :
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog dff_const4.v
+4. synth -top dff_const4
+5. dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+Generated synthesized circuit:
+
+![Screenshot from 2024-10-20 19-34-12](https://github.com/user-attachments/assets/741e6b46-c4a9-49ec-81fb-e109fdfa3f53)
+
+
+Terminal output:
+
+![Screenshot from 2024-10-20 19-33-20](https://github.com/user-attachments/assets/69cb6db6-435d-4b0b-9ede-4ec7c579e13c)
+
+
+![Screenshot from 2024-10-20 19-33-42](https://github.com/user-attachments/assets/43ddd74d-4b84-45ae-ae07-098cf044a609)
+
+
+![Screenshot from 2024-10-20 19-33-52](https://github.com/user-attachments/assets/f17d8dca-3ce0-48aa-8e08-be626c854f0b)
+
+
+![Screenshot from 2024-10-20 19-34-05](https://github.com/user-attachments/assets/1881bf31-479c-44af-8188-c79ca176d05e)
+
+
+5.1] Simulating dff_const5.v and it's testbench tb_dff_const5.v using iverilog and observing results on gtkwave
+
+![Screenshot from 2024-10-20 19-40-51](https://github.com/user-attachments/assets/e85554e5-5245-4aae-b3ae-32280f25e4af)
+
+
+![Screenshot from 2024-10-20 19-41-27](https://github.com/user-attachments/assets/62e86504-d2bf-4e94-aabc-20eee54a9a7a)
+
+5.2] Synthesizing the dff_const5.v file:
+
+Commands to perform synthesis on dff_const5.v :
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog dff_const5.v
+4. synth -top dff_const5
+5. dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+Generated synthesized circuit:
+
+![Screenshot from 2024-10-20 19-44-38](https://github.com/user-attachments/assets/7b39438e-e50a-4c18-8f94-ec522fb1d637)
+
+Terminal output:
+
+![Screenshot from 2024-10-20 19-43-42](https://github.com/user-attachments/assets/e8dcedef-c1b4-4237-86c1-5ddf313b1773)
+
+![Screenshot from 2024-10-20 19-43-53](https://github.com/user-attachments/assets/9cfd23a4-4e2a-4eb8-a539-c9f37ea83b9b)
+
+
+![Screenshot from 2024-10-20 19-44-01](https://github.com/user-attachments/assets/3143fa85-0a2f-4aff-ac9f-60f1c8dd2824)
+
+
+![Screenshot from 2024-10-20 19-44-13](https://github.com/user-attachments/assets/3553aebe-f8ff-4459-b375-5082214342bf)
+
+
+![Screenshot from 2024-10-20 19-44-23](https://github.com/user-attachments/assets/aff8a53c-3c60-4c7c-b3f9-d81686dca158)
+
+
+***Unused output optimization***
+
+
+Optimizing the counter_opt.v verilog file
+
+Command:
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog counter_opt.v
+4. synth -top counter_opt
+5. dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+Generated optimized circuit:
+
+![Screenshot from 2024-10-20 19-54-37](https://github.com/user-attachments/assets/fe58f2b6-ad8f-4f08-bb93-9f36a82ed726)
+
+
+Terminal output:
+
+![Screenshot from 2024-10-20 19-53-35](https://github.com/user-attachments/assets/0e9aa6c3-1008-496f-9574-3a1b0d3a3db7)
+
+
+![Screenshot from 2024-10-20 19-53-46](https://github.com/user-attachments/assets/4da66e7a-26d3-4efa-91d2-c4ccfb123a1a)
+
+
+![Screenshot from 2024-10-20 19-53-54](https://github.com/user-attachments/assets/563d077a-83b5-4cf5-81ca-8c78e4d357b6)
+
+![Screenshot from 2024-10-20 19-54-01](https://github.com/user-attachments/assets/55fd9610-b734-4123-9808-8dd76aa236ed)
+
+
+![Screenshot from 2024-10-20 19-54-09](https://github.com/user-attachments/assets/604bb636-08b5-41a3-bf3d-c16864c60992)
+
+![Screenshot from 2024-10-20 19-54-15](https://github.com/user-attachments/assets/76a57fc2-9726-4c49-8fec-779233b2846b)
+
+
+
+Observation : It infer only 1 D-FF
+
+**Modifying the above RTL of counter**
+
+Commands-
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog counter_opt2.v
+4. synth -top counter_opt
+5. dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+Generated circuit:
+
+![image](https://github.com/user-attachments/assets/2ccad37a-0540-4615-851a-eef3ed57be2f)
+
+Terminal output:
+
+![Screenshot from 2024-10-20 20-28-09](https://github.com/user-attachments/assets/cb279e3a-10b4-4d87-abae-204835379f5e)
+
+Observation - We can observe that 3 flip-flops are been inferred.
 
 </details>
 
 
+<details>
+ <summary> Day-4 </summary>
+
+
+ ****GLS , blocking vs non blocking and Synthesis-Simulation mismatch****
+
+***LAB-8: GLS and synthesis-simulation Mismatch***
+
+Verilog files used to perform this lab:
+
+
+![Screenshot from 2024-10-20 20-42-54](https://github.com/user-attachments/assets/7f70b143-d666-4d4c-bf4f-439ccac22c8f)
+
+1.1]Simulation of 2x1 Mux using Ternary operator
+
+![Screenshot from 2024-10-20 21-02-22](https://github.com/user-attachments/assets/0b56d805-3d4b-4cc9-9f8e-2ac7b1cae8df)
+
+
+![Screenshot from 2024-10-20 21-02-43](https://github.com/user-attachments/assets/1aa6a23d-486c-4c01-acd8-883ade5829c4)
+
+
+1.2] Synthesis of 2x1 Mux using Ternary operator
+
+Commands for synthesizing 2x1 Mux using Ternary operator:
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog ternary_operator_mux.v
+4. synth -top ternary_operator_mux
+5. abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+6. write_verilog -noattr ternary_operator_mux_net.v
+7. !gvim ternary_operator_mux_net.v
+8. show
+```
+
+Generated Netlist:
+
+![Screenshot from 2024-10-20 21-21-56](https://github.com/user-attachments/assets/e67e148d-8f58-4076-a45c-221d1940fb6c)
 
 
 
+Generated circuit :
+
+![Screenshot from 2024-10-20 21-15-52](https://github.com/user-attachments/assets/e0e1679a-875a-49d7-8223-9ca05304d058)
+
+Terminal output :
+
+![Screenshot from 2024-10-20 21-14-49](https://github.com/user-attachments/assets/62834055-520d-4598-8dfd-f540eff58360)
+
+![Screenshot from 2024-10-20 21-15-09](https://github.com/user-attachments/assets/5352067d-15e2-4b20-86c4-c28cf8c37b5b)
+
+
+![Screenshot from 2024-10-20 21-15-22](https://github.com/user-attachments/assets/0bed424c-2711-41df-b847-23c56c061acd)
+
+
+![Screenshot from 2024-10-20 21-15-33](https://github.com/user-attachments/assets/8b1406c3-a1ed-430e-96dc-88413b71f86b)
+
+
+Observation : One 2x1 MUX is inferred.
+
+**1.3]Performing GLS (Gate Level Synthesis)**
+
+Commands for GLS :
+
+```
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v ternary_operator_mux_net.v tb_ternary_operator_mux.v
+./a.out
+gtkwave tb_ternary_operator_mux.vcd
+```
+
+Terminal output:
+
+
+![Screenshot from 2024-10-20 21-27-36](https://github.com/user-attachments/assets/f8bf1c9d-4dbe-4004-a2e8-ee70564239ad)
+
+GTKwavefrom form the GLS output:
+
+![Screenshot from 2024-10-20 21-27-49](https://github.com/user-attachments/assets/8583a100-c938-47bb-bbc4-bcecdeed1ceb)
+
+
+2.1]Simulation of Bad Mux
+
+![Screenshot from 2024-10-20 21-31-44](https://github.com/user-attachments/assets/f4f57092-935f-4424-b448-b01350437971)
+
+![Screenshot from 2024-10-20 21-34-57](https://github.com/user-attachments/assets/0cebd7ca-91fb-4c48-80c4-f495d863f5a7)
+
+Observation : The bad_mux is not properly working as a mux , as when select is low output "y" should follow "i0", but it fails to do so.
+
+2.2] Synthesizing the Bad Mux verilog file.
+
+Commands Used are:
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog bad_mux.v
+4. synth -top bad_mux
+5. abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+6. write_verilog -noattr bad_mux_net.v
+7. !gvim bad_mux_net.v
+8. show
+```
+
+Generated Netlist:
+
+![Screenshot from 2024-10-20 21-44-57](https://github.com/user-attachments/assets/920c4250-1c7d-4083-8261-571e609ea663)
+
+
+Generated circuit:
+
+![Screenshot from 2024-10-20 21-44-42](https://github.com/user-attachments/assets/b0e13e8c-4f6b-4afd-b3ea-1dd696db9d0d)
+
+
+Terminal output:
+
+![Screenshot from 2024-10-20 21-43-39](https://github.com/user-attachments/assets/1822bfc2-c035-4e99-8dff-3a2d5bf5a1f5)
+
+![Screenshot from 2024-10-20 21-43-59](https://github.com/user-attachments/assets/7a1f4a82-d137-4f89-a79e-70585acaf698)
+
+![Screenshot from 2024-10-20 21-44-15](https://github.com/user-attachments/assets/a8998c46-73d3-4605-8cb0-bdf08281aa13)
+
+![Screenshot from 2024-10-20 21-44-32](https://github.com/user-attachments/assets/3f4fd81c-c830-4834-a3d0-ae66ac0a200b)
+
+**2.3]Performing GLS (Gate Level Synthesis)**
+
+Commands for GLS :
+
+```
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v bad_mux_net.v tb_bad_mux.v
+./a.out
+gtkwave tb_bad_mux.vcd
+```
+
+Terminal output:
+
+
+![Screenshot from 2024-10-20 21-49-09](https://github.com/user-attachments/assets/ecabc01a-f64e-4f7f-8491-298dbb41fbd2)
+
+GTKWaveform for GLS for Bad Mux:
+
+![Screenshot from 2024-10-20 21-51-41](https://github.com/user-attachments/assets/6d356252-8ead-45e0-bf77-e8ba4e94cb67)
+
+
+Observation : After doing GLS, drawbacks of bad_mux are overcomed as now when select is low output "y" follows input "i0".
+
+
+***LAB-9: Synthesis-simulation Mismatch Blocking statement***
+
+Note: Verilog file used to perform this task is blocking_caveat.v
+
+![Screenshot from 2024-10-20 22-01-40](https://github.com/user-attachments/assets/5a35841e-7139-4c85-9637-1d8f3b6f4bac)
 
 
 
+1.1]Simulation of blocking_caveat.v
 
 
+![Screenshot from 2024-10-20 22-01-51](https://github.com/user-attachments/assets/f2230b40-0d53-4d55-8d1e-06263b21fc7c)
+
+![Screenshot from 2024-10-20 22-09-08](https://github.com/user-attachments/assets/aac0464f-68b9-4fc7-b1fb-1cd745088643)
 
 
+Observation : At a particular point, when a=0 , b=0 , c=1 ; output of a|b should be = 0 ; hench the resultant d ie {a|b}&c should be 0 but instead we can observe it to be 1. 
+	      This occurs due to usage of blocking statement(logic is x=a&b , d = x|c where x is intermidiate variable)
+
+
+1.2]Synthesizing of blocking_caveat.v
+
+Commands used for synthesizing:
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog blocking_caveat.v
+4. synth -top blocking_caveat
+5. abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+6. write_verilog -noattr blocking_caveat_net.v
+7. !gvim blocking_caveat_net.v
+8. show
+```
+
+Generated netlist:
+
+![Screenshot from 2024-10-20 22-18-43](https://github.com/user-attachments/assets/aa7ddbe1-91c3-41a6-917f-ce04d58451fb)
+
+
+Generated circuit :
+
+
+![Screenshot from 2024-10-20 22-18-51](https://github.com/user-attachments/assets/5e4ebc5a-791f-44fc-b30b-04bf96757fbf)
+
+Terminal output:
+
+![Screenshot from 2024-10-20 22-17-55](https://github.com/user-attachments/assets/69de6cbd-e7e0-4daa-bdf3-d4b5be8ed7f5)
+
+
+![Screenshot from 2024-10-20 22-18-03](https://github.com/user-attachments/assets/9472df63-fae2-4684-9b0c-ab61599a75ab)
+
+![Screenshot from 2024-10-20 22-18-25](https://github.com/user-attachments/assets/d4274e96-fb17-468d-bb6f-9f673ae960a5)
+
+
+**1.3]Performing GLS (Gate Level Synthesis)**
+
+Commands for GLS :
+
+```
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v blocking_caveat_net.v tb_blocking_caveat.v
+./a.out
+gtkwave tb_blocking_caveat.vcd
+```
+
+Terminal output:
+
+![Screenshot from 2024-10-20 22-22-56](https://github.com/user-attachments/assets/41b902bd-a798-425d-ba9c-064ce7f889c1)
+
+
+GTKWave output:
+
+![Screenshot from 2024-10-20 22-24-56](https://github.com/user-attachments/assets/f22b61f2-9892-4a7c-ad29-4ce61a6e281f)
+
+
+Observation : Hence after performing GLS (gate level synthesis) drawback is overcomed as when a=0 , b=0 , c=1 ; output of a|b should be = 0 ; hench the resultant d ie {a|b}&c should be 0 and we can observe it to be 0. 
+
+
+</details>
 
 
 
