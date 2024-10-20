@@ -1605,6 +1605,262 @@ Observation : Their are 0 memories, 0 memory bits, 0 processes and 0 cells.
 </details>
 
 
+<details>
+ <summary> Day-3 </summary>
+
+
+ ***Combinational and Sequential optimization***
+
+ **LAB-7: Combinational Logic optimization**
+
+**1] Optimizing opt_check.v verilog file:**
+
+Commands to perform optimization-
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog opt_check.v
+4. synth -top opt_check
+5. opt_clean -purge
+6. abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+Note - Command to do the optimization is ``opt_clean -purge``
+
+Optimized 2-input AND gate circuit :
+
+
+![Screenshot from 2024-10-20 16-01-11](https://github.com/user-attachments/assets/745c5a1d-517d-4a52-aa0c-bd8085bf4f4b)
+
+
+Terminal output:
+
+![Screenshot from 2024-10-20 15-59-45](https://github.com/user-attachments/assets/29a275d1-2f6c-46f6-b37d-64705f9746c0)
+
+
+![Screenshot from 2024-10-20 16-00-11](https://github.com/user-attachments/assets/d36f3a87-f499-42ca-8762-381d5cbe8580)
+
+![Screenshot from 2024-10-20 16-00-21](https://github.com/user-attachments/assets/ed70da98-d6e4-4512-949d-72fcff2f5339)
+
+![Screenshot from 2024-10-20 16-00-48](https://github.com/user-attachments/assets/4c4c5162-1b0a-46bb-a778-d5602b240742)
+
+
+Observation: Unused or redundant logic in the design and purges any dangling wires or gates are been Removed.
+
+
+**2] Optimizing opt_check2.v verilog file:**
+
+Commands to perform optimization-
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog opt_check2.v
+4. synth -top opt_check2
+5. opt_clean -purge
+6. abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+Optimized 2-input OR gate circuit :
+
+
+![Screenshot from 2024-10-20 16-08-53](https://github.com/user-attachments/assets/734c3b95-0027-4992-bcfb-8130021b736c)
+
+Terminal output: 
+
+![Screenshot from 2024-10-20 16-08-19](https://github.com/user-attachments/assets/5a0aba3b-0c72-43f3-898e-b84d8d5be28f)
+
+![Screenshot from 2024-10-20 16-08-41](https://github.com/user-attachments/assets/8f6c71c8-b45d-4622-9df4-7fbb257ea7da)
+
+
+**3] Optimizing opt_check3.v verilog file:**
+
+
+Commands to perform optimization-
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog opt_check3.v
+4. synth -top opt_check3
+5. opt_clean -purge
+6. abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+
+Optimized 3-input AND gate circuit :
+
+![Screenshot from 2024-10-20 16-16-45](https://github.com/user-attachments/assets/779268c6-d4cd-4f47-8494-f55909539e61)
+
+
+Terminal output:
+
+![Screenshot from 2024-10-20 16-15-53](https://github.com/user-attachments/assets/f309ed3d-e638-4f51-a880-b33faba66e4b)
+
+
+![Screenshot from 2024-10-20 16-16-10](https://github.com/user-attachments/assets/3b33a080-a2b5-4218-9a8a-c29f5531b73c)
+
+![Screenshot from 2024-10-20 16-16-18](https://github.com/user-attachments/assets/0d02fdf4-7bf3-4b72-8000-a8fa5cac9d95)
+
+
+![Screenshot from 2024-10-20 16-16-31](https://github.com/user-attachments/assets/a41c48b3-b9e0-42a7-8588-d611f09f37ba)
+
+
+**4] Optimizing opt_check4.v verilog file:**
+
+Commands to perform optimization-
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog opt_check4.v
+4. synth -top opt_check4
+5. opt_clean -purge
+6. abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+Optimized 3-input XNOR gate circuit :
+
+![Screenshot from 2024-10-20 16-24-35](https://github.com/user-attachments/assets/5d06c5fa-893e-4074-b696-7f656f6d6bf4)
+
+Terminal output:
+
+
+![Screenshot from 2024-10-20 16-23-32](https://github.com/user-attachments/assets/3214fb25-6f5d-414c-a347-fd78ef7a47b8)
+
+![Screenshot from 2024-10-20 16-23-49](https://github.com/user-attachments/assets/b8f58d82-2207-46d9-9d7f-b32c46de6074)
+
+![Screenshot from 2024-10-20 16-24-03](https://github.com/user-attachments/assets/5b002e33-ae3c-4b7b-ba94-9c2a7e5bd12f)
+
+
+![Screenshot from 2024-10-20 16-24-23](https://github.com/user-attachments/assets/794ed336-fdc1-4c08-83fa-e17621097142)
+
+
+**5] Optimizing multiple_module_opt.v verilog file:**
+
+Commands to perform optimization-
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog multiple_module_opt.v
+
+4. synth -top opt_check4
+5. opt_clean -purge
+6. abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+Optimized circuit:
+
+![Screenshot from 2024-10-20 16-38-40](https://github.com/user-attachments/assets/f875960d-bfb8-47b5-bca3-97afb9b757af)
+
+
+Terminal Output:
+
+![Screenshot from 2024-10-20 16-37-47](https://github.com/user-attachments/assets/686cf35f-ac05-43d3-aaf4-4df173e0a5eb)
+
+
+![Screenshot from 2024-10-20 16-38-07](https://github.com/user-attachments/assets/e5da6bb0-ba02-475e-ae5b-6f06567648eb)
+
+
+![Screenshot from 2024-10-20 16-38-17](https://github.com/user-attachments/assets/bf96189f-17ad-426a-b1ea-aadfa16962a7)
+
+
+![Screenshot from 2024-10-20 16-38-32](https://github.com/user-attachments/assets/39b2153b-61a5-4c27-8582-ecf848b7d894)
+
+
+**LAB-7: Sequential Logic optimization**
+
+1.1] Simulating dff_const1.v and it's testbench tb_dff_const1.v using iverilog and observing results on gtkwave
+
+
+![Screenshot from 2024-10-20 16-47-40](https://github.com/user-attachments/assets/ef1bac93-a3b4-4758-9693-e5675b83a697)
+
+![Screenshot from 2024-10-20 16-47-54](https://github.com/user-attachments/assets/7114fbe4-35a1-4f5b-bf0f-f958a8cde569)
+
+Observation : As the reset signa goes low , the output "q" doesn't immediately goes high , instead it waits for the next positive edge of clock signal to change it's state.
+
+1.2] Synthesizing the dff_const1.v file:
+
+Commands to perform synthesis on dff_const1.v :
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog dff_const1.v
+4. synth -top dff_const1
+5. dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+```dfflibmap``` is used for mapping the D flip-flop.
+
+Generated synthesized circuit for D-FF:
+
+![Screenshot from 2024-10-20 17-51-22](https://github.com/user-attachments/assets/edd2af2a-5e5d-480f-af30-a0ca1cd56be6)
+
+Terminal output:
+
+
+![Screenshot from 2024-10-20 17-50-45](https://github.com/user-attachments/assets/59064161-220b-4e16-b0c5-a8075a2cdd22)
+
+
+![Screenshot from 2024-10-20 17-50-58](https://github.com/user-attachments/assets/80c51b3b-a746-4b77-8d16-7b1a87a6fb31)
+
+Observation - It is inferring a flop i.e D-FF. 
+
+![Screenshot from 2024-10-20 17-51-14](https://github.com/user-attachments/assets/a765b84b-356f-40e5-a43b-83141f489c5b)
+
+
+
+2.1] Simulating dff_const2.v and it's testbench tb_dff_const2.v using iverilog and observing results on gtkwave
+
+
+![Screenshot from 2024-10-20 16-55-32](https://github.com/user-attachments/assets/3996a2f2-5df4-484c-847f-55673dadf4ae)
+
+
+![Screenshot from 2024-10-20 16-56-02](https://github.com/user-attachments/assets/1ca9a97d-602f-448d-b326-8486777d4f72)
+
+
+Observation : here, output "q" is always high, irrespective of the state of reset signal.
+
+2.2] Synthesizing the dff_const2.v file:
+
+Commands to perform synthesis on dff_const1.v :
+
+```
+1. yosys
+2. read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+3. read_verilog dff_const2.v
+4. synth -top dff_const2
+5. dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+7. show
+```
+
+Generated synthesized circuit:
+
+
+
+
+Terminal output-
+
+![Screenshot from 2024-10-20 17-58-52](https://github.com/user-attachments/assets/18f561e2-9e08-430f-8510-2cdc81436aab)
+
+
+Observation : It is not inferring a flop here as it was doing for the dff_const1 synthesizing.
+
+
+
+
+</details>
+
+
 
 
 
