@@ -2356,6 +2356,7 @@ Now verifying the result with pre-synthesis-simulation :
 
 ![Screenshot from 2024-10-23 20-23-54](https://github.com/user-attachments/assets/774decad-6be7-4cc1-8d40-f2509327dd22)
 
+***Pre synthesis simulation waveform***
 
 ![Screenshot from 2024-10-23 20-24-07](https://github.com/user-attachments/assets/201272dc-13a7-4d89-9fa5-c23e83822023)
 
