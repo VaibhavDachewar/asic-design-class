@@ -2348,7 +2348,7 @@ Terminal output -
 
 GTKwaveform :
 
-***Post synthesis simulation waveform:***
+***Post synthesis simulation waveform:[SYNTHESIZED OUTPUT]***
 
 ![Screenshot from 2024-10-24 01-08-57](https://github.com/user-attachments/assets/3d252f7a-a8af-4e03-87e1-c140a4de1577)
 
@@ -2356,7 +2356,7 @@ Now verifying the result with pre-synthesis-simulation :
 
 ![Screenshot from 2024-10-23 20-23-54](https://github.com/user-attachments/assets/774decad-6be7-4cc1-8d40-f2509327dd22)
 
-***Pre synthesis simulation waveform***
+***Pre synthesis simulation waveform [FUNCTIONALITY OUTPUT]***
 
 ![Screenshot from 2024-10-23 20-24-07](https://github.com/user-attachments/assets/201272dc-13a7-4d89-9fa5-c23e83822023)
 
