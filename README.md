@@ -2272,21 +2272,95 @@ Observation : Hence after performing GLS (gate level synthesis) drawback is over
 
 </details>
 
+</details>
+
+<details>
+ <summary> TASK-9 </summary>
+
+ ***Synthesis of RISC-V using yosys and Post synthesis simulation of Babysoc using iverilog GTKwave***
 
 
+To perform synthesis and generate netlist we will use YOSYS synthesizer.
+
+**Commands to generate netlist** 
+
+```
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty -lib ../lib/avsddac.lib
+read_liberty -lib ../lib/avsdpll.lib
+read_verilog vsdbabysoc.v
+read_verilog rvmyth.v
+read_verilog clk_gate.v
+synth -top vsdbabysoc
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show vsdbabysoc
+write_verilog -noattr vsdbabysoc.synth.v
+!gvim vsdbabysoc.synth.v
+```
+
+Synthesised Circuit Diagram for generated netlist:
+
+![Screenshot from 2024-10-24 00-31-40](https://github.com/user-attachments/assets/907cc374-c317-47fc-8434-d00c54c83004)
+
+Generated Netlist :
+
+![Screenshot from 2024-10-24 01-23-40](https://github.com/user-attachments/assets/3339f763-7d54-407c-b259-8fe87870c531)
 
 
+![Screenshot from 2024-10-24 01-23-48](https://github.com/user-attachments/assets/f970804c-47f3-4af7-94e7-a91dca75928b)
 
 
+![Screenshot from 2024-10-24 01-24-17](https://github.com/user-attachments/assets/307c1345-11e0-4ab4-a86f-37f7691a1a7a)
+
+Terminal output :
+
+![Screenshot from 2024-10-24 01-03-53](https://github.com/user-attachments/assets/986f4e2f-922c-4200-b3b1-8b5ef53fac01)
+![Screenshot from 2024-10-24 01-05-08](https://github.com/user-attachments/assets/d10e83cd-177b-475a-9e29-c0782f148140)
 
 
+![Screenshot from 2024-10-24 01-05-16](https://github.com/user-attachments/assets/cf16388d-e969-4500-8a0e-1d8c8354c8f8)
+
+![Screenshot from 2024-10-24 01-05-23](https://github.com/user-attachments/assets/e7943e34-e414-47c2-98ed-85acedf4c86e)
 
 
+![Screenshot from 2024-10-24 01-05-38](https://github.com/user-attachments/assets/204bcd16-697b-4cee-8e16-a822fcf60715)
+
+![Screenshot from 2024-10-24 01-05-47](https://github.com/user-attachments/assets/a30d49fa-ae78-4cf9-bb22-4be49888a635)
 
 
+***Performing GLS (Gate Level Synthesis):***
+
+Commands to perform GLS :
+
+```
+cd VSDBabySoC
+mkdir -p output/post_synth_sim && iverilog -o output/post_synth_sim/post_synth_sim.out -DPOST_SYNTH_SIM -DFUNCTIONAL -DUNIT_DELAY=#1 -I src/module/include -I src/module -I src/gls_model src/module/testbench.v && cd output/post_synth_sim && ./post_synth_sim.out
+gtkwave post_synth_sim.vcd
+```
+
+***After performing GLS we can see the post synthesis simulation of RISCV processor as below***
+
+Terminal output -
+
+![Screenshot from 2024-10-24 01-12-33](https://github.com/user-attachments/assets/4d5c4538-f99f-4469-941b-29c7740bdeb1)
+
+GTKwaveform :
+
+***Post synthesis simulation waveform:***
+
+![Screenshot from 2024-10-24 01-08-57](https://github.com/user-attachments/assets/3d252f7a-a8af-4e03-87e1-c140a4de1577)
+
+Now verifying the result with pre-synthesis-simulation :
+
+![Screenshot from 2024-10-23 20-23-54](https://github.com/user-attachments/assets/774decad-6be7-4cc1-8d40-f2509327dd22)
 
 
+![Screenshot from 2024-10-23 20-24-07](https://github.com/user-attachments/assets/201272dc-13a7-4d89-9fa5-c23e83822023)
 
+***Observation : We can observed that the waveforms for pre_synth_simulation and  post_synth_simulation i.e after using Yosys synthesis are the same.
+		  Hence we can observe sum of 1 to 9 as 2D. Hence output O1 = O2***
 
 
 
