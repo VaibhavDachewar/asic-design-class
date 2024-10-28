@@ -2452,7 +2452,7 @@ Reg2Reg max path:
 
 ![Screenshot from 2024-10-28 18-50-48](https://github.com/user-attachments/assets/5492c675-14fd-4a6b-ab27-eeff5e5e63e0)
 
-Reg2Reg max path:
+Reg2Reg min path:
 
 ![Screenshot from 2024-10-28 18-51-00](https://github.com/user-attachments/assets/dd536846-6310-4689-8d27-938dec7c8c9a)
 
