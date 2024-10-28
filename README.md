@@ -2364,8 +2364,96 @@ Now verifying the result with pre-synthesis-simulation :
 		  Hence we can observe sum of 1 to 9 as 2D. Hence output O1 = O2***
 
 
+</details>
+
+</details>
+
+<details>
+ <summary> TASK-10 </summary>
+
+***LAB - Timing Analysis of VSDBabySOC using OpenSTA***
 
 
+## STA:
+Static Timing Analysis (STA) is essential in ASIC design for ensuring that the digital circuit meets the required timing constraints without requiring dynamic simulation of actual data. The focus of STA is to validate that all timing paths within the design meet specific constraints, which ensures the circuit will function correctly across all operational conditions.
+
+* Timing Paths: In STA, timing paths are analyzed to ensure data can travel from one point to another within a defined time. The main types are:
+
+* Setup Paths: Ensure data arrives at the next stage before the clock edge.
+* Hold Paths: Ensure data is stable for a certain period after the clock edge.
+* Clock Domains: STA divides the design into different clock domains to verify timing between elements synchronized to the same or different clocks. For multiple clocks, STA verifies the timing paths between each clock domain, focusing on:
+
+* Synchronous Domains: Where clocks are related and can be analyzed for setup and hold constraints.
+* Asynchronous Domains: Where clocks are unrelated, requiring special handling, often with synchronizers or FIFO buffers.
+Clock Skew and Jitter:
+
+* Clock Skew: The difference in arrival times of a clock signal at different flip-flops. STA checks skew impact since it affects timing paths and data setup/hold requirements.
+* Clock Jitter: Variation in clock edge timing due to noise or other factors. STA incorporates jitter in timing analysis to ensure that jitter doesn’t cause timing violations.
 
 
+### Timing Checks:
+* Setup Check: Ensures data arrives before the clock edge, allowing sufficient time for stabilization.
+* Hold Check: Ensures data remains stable long enough after the clock edge.
 
+### Timing Margins and Slack:
+
+* Slack: The difference between the required time and the actual arrival time of signals. Positive slack means timing constraints are met, while negative slack indicates a timing violation.
+* Setup Slack: Time margin for setup constraints.
+* Hold Slack: Time margin for hold constraints.
+* Static Timing Tools: STA tools, like Synopsys PrimeTime and Cadence Tempus, perform analysis by creating and traversing timing graphs that represent all paths in the design. These tools provide reports on slack, critical paths, and timing violations.
+
+Process, Voltage, and Temperature (PVT) Corners: STA includes PVT analysis to account for variations in manufacturing, operational voltages, and temperature ranges. STA ensures that timing constraints are met across worst-case PVT corners.
+
+## Optimization Techniques:
+
+* Buffer Insertion: Adds buffers to reduce delay in long paths.
+* Gate Sizing: Resizes gates to improve timing on critical paths.
+* Clock Tree Optimization (CTO): Minimizes skew and jitter in the clock distribution network. By ensuring that timing analysis is thorough and covers all potential scenarios, STA plays a crucial role in achieving reliable and high-performance ASIC designs.
+
+### reg2reg Path:
+A reg2reg path (register-to-register path) refers to a timing path in a digital circuit that connects two sequential elements, specifically flip-flops or registers. This path is crucial in the context of Static Timing Analysis (STA) because it represents the flow of data from one register to another through combinational logic.
+
+Reg2reg paths are essential for ensuring proper data flow and synchronization in digital circuits, especially in designs with pipelining or sequential operations. Analyzing these paths helps in verifying that the data processing occurs correctly across clock cycles, thereby ensuring the overall functionality and reliability of the circuit.
+
+### clk2reg Path:
+A clk2reg path (clock-to-register path) refers to a timing path in a digital circuit that connects the clock signal to a register (flip-flop). This path is crucial for ensuring that the register operates correctly in response to clock events.
+
+The following commands were run to get the max-min report of the VSDbabysoc design:
+
+```
+read_liberty /mnt/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog /mnt/vsdbabysoc.synth.v  
+link_design rvmyth
+
+create_clock -name CLK -period 9.95 [get_ports CLK]
+set_clock_uncertainty [expr 0.05 * 9.95] -setup [get_clocks CLK]
+set_clock_uncertainty [expr 0.08 * 9.95] -hold [get_clocks CLK]
+set_clock_transition [expr 0.05 * 9.95] [get_clocks CLK]
+set_input_transition [expr 0.08 * 9.95] [all_inputs]
+
+report_checks -path_delay max
+report_checks -path_delay min
+```
+
+Timing configurations:
+
+    Clock period: 9.95 nanoseconds
+    Setup uncertainty: 5% of clock period
+    Clock transition: 5% of clock period
+    Hold uncertainty: 8% of clock period
+    Input transition: 8% of clock period
+
+
+Terminal output :
+
+![Screenshot from 2024-10-28 18-49-57](https://github.com/user-attachments/assets/e57a2e6a-1fb4-4459-8c8f-a310ded2d904)
+
+Reg2Reg max path:
+
+![Screenshot from 2024-10-28 18-50-48](https://github.com/user-attachments/assets/5492c675-14fd-4a6b-ab27-eeff5e5e63e0)
+
+Reg2Reg max path:
+
+![Screenshot from 2024-10-28 18-51-00](https://github.com/user-attachments/assets/dd536846-6310-4689-8d27-938dec7c8c9a)
+
+The max path report indicates Setup Slack while the min path report shows Hold Slack measurements.
