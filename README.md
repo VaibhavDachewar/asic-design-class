@@ -2544,6 +2544,27 @@ set_input_transition [expr $PERIOD * 0.08] [get_ports VREFH]
 
 ![Screenshot from 2024-11-04 19-21-27](https://github.com/user-attachments/assets/90ab0fbd-eebe-40ca-8be5-b888d6f92341)
 
+From the table, we have plotted the below graphs:
 
+***1: Worst Setup Slack (WNS):***
+
+
+![Worst Setup Slack_V](https://github.com/user-attachments/assets/98b5b4ff-2c50-45a1-98dc-9d6c23d6e01b)
+
+***2: Worst Hold Slack (WHS):***
+
+
+![Worst Hold Slack_V](https://github.com/user-attachments/assets/243fe5b2-561a-4861-86d2-f84b0a06f04e)
+
+
+***3: Total Negative Slack (TNS)***
+
+![TNS_V](https://github.com/user-attachments/assets/d6d64704-e908-4fa4-9c6a-8406406e3459)
+
+
+Observation:
+
+1: Worst setup slack - sky130_fd_sc_hd__ss_n40C_1v28 PVT Corner library file
+2: Worst hold slack - sky130_fd_sc_hd__ff_n40C_1v95 PVT Corner library file
 
 
