@@ -2457,3 +2457,93 @@ Reg2Reg min path:
 ![Screenshot from 2024-10-28 18-51-00](https://github.com/user-attachments/assets/dd536846-6310-4689-8d27-938dec7c8c9a)
 
 The max path report indicates Setup Slack while the min path report shows Hold Slack measurements.
+
+<details>
+
+<details>
+ <summary> TASK-12 </summary>
+
+***LAB: PVT Corner Analysis for Synthesized VSDBabySoC using OpenSTA***
+
+The STA checks are performed across all the corners to confirm the design meets the target timing requirements.
+
+The worst max path (Setup-critical) corners in the sub-40nm process nodes are usually: ss_LowTemp_LowVolt, ss_HighTemp_LowVolt (Slowest corners)
+The worst min path (Hold-critical) corners being: ff_LowTemp_HighVolt,ff_HighTemp_HighVolt (Fastest corners).
+
+***The below tcl script ```sta_pvt.tcl``` can be run to performt the STA across the PVT corners for which the sky130 lib files are available:***
+
+```
+set list_of_lib_files(1) "sky130_fd_sc_hd__tt_025C_1v80.lib"
+set list_of_lib_files(2) "sky130_fd_sc_hd__tt_100C_1v80.lib"
+set list_of_lib_files(3) "sky130_fd_sc_hd__ff_100C_1v65.lib"
+set list_of_lib_files(4) "sky130_fd_sc_hd__ff_100C_1v95.lib"
+set list_of_lib_files(5) "sky130_fd_sc_hd__ff_n40C_1v56.lib"
+set list_of_lib_files(6) "sky130_fd_sc_hd__ff_n40C_1v65.lib"
+set list_of_lib_files(7) "sky130_fd_sc_hd__ff_n40C_1v76.lib"
+set list_of_lib_files(8) "sky130_fd_sc_hd__ff_n40C_1v95.lib"
+set list_of_lib_files(9) "sky130_fd_sc_hd__ss_100C_1v40.lib"
+set list_of_lib_files(10) "sky130_fd_sc_hd__ss_100C_1v60.lib"
+set list_of_lib_files(11) "sky130_fd_sc_hd__ss_n40C_1v28.lib"
+set list_of_lib_files(12) "sky130_fd_sc_hd__ss_n40C_1v35.lib"
+set list_of_lib_files(13) "sky130_fd_sc_hd__ss_n40C_1v40.lib"
+set list_of_lib_files(14) "sky130_fd_sc_hd__ss_n40C_1v44.lib"
+set list_of_lib_files(15) "sky130_fd_sc_hd__ss_n40C_1v60.lib"
+set list_of_lib_files(16) "sky130_fd_sc_hd__ss_n40C_1v76.lib"
+
+for {set i 1} {$i <= [array size list_of_lib_files]} {incr i} {
+read_liberty /mnt/$list_of_lib_files($i)
+read_liberty -min /mnt/avsdpll.lib
+read_liberty -max /mnt/avsdpll.lib
+read_liberty -min /mnt/avsddac.lib
+read_liberty -max /mnt/avsddac.lib
+read_verilog /mnt/vsdbabysoc.synth.v
+link_design rvmyth
+read_sdc /mnt/vsdbabysoc_synthesis.sdc
+check_setup -verbose
+report_checks -path_delay min_max -fields {nets cap slew input_pins fanout} -digits {4} > /mnt/sta_output/min_max_$list_of_lib_files($i).txt
+
+exec echo "$list_of_lib_files($i)" >> /mnt/sta_output/sta_worst_max_slack.txt
+report_worst_slack -max -digits {4} >> /mnt/sta_output/sta_worst_max_slack.txt
+
+exec echo "$list_of_lib_files($i)" >> /mnt/sta_output/sta_worst_min_slack.txt
+report_worst_slack -min -digits {4} >> /mnt/sta_output/sta_worst_min_slack.txt
+
+exec echo "$list_of_lib_files($i)" >> /mnt/sta_output/sta_tns.txt
+report_tns -digits {4} >> /mnt/sta_output/sta_tns.txt
+
+exec echo "$list_of_lib_files($i)" >> /mnt/sta_output/sta_wns.txt
+report_wns -digits {4} >> /mnt/sta_output/sta_wns.txt
+}
+
+```
+
+***The SDC file used for generating clock and data constraints is given below:***
+
+```
+set PERIOD 9.95
+set_units -time ns
+create_clock [get_pins {pll/CLK}] -name clk -period $PERIOD
+set_clock_uncertainty [expr 0.05 * $PERIOD] -setup [get_clocks clk]
+set_clock_uncertainty [expr 0.08 * $PERIOD] -hold [get_clocks clk]
+set_clock_transition [expr 0.05 * $PERIOD] [get_clocks clk]
+
+
+set_input_transition [expr $PERIOD * 0.08] [get_ports ENB_CP]
+set_input_transition [expr $PERIOD * 0.08] [get_ports ENB_VCO]
+set_input_transition [expr $PERIOD * 0.08] [get_ports REF]
+set_input_transition [expr $PERIOD * 0.08] [get_ports VCO_IN]
+set_input_transition [expr $PERIOD * 0.08] [get_ports VREFH]
+```
+
+***Run below commands on terminal to source the sta_pvt.tcl file***
+
+![Screenshot from 2024-11-03 14-31-26](https://github.com/user-attachments/assets/0b79899f-a9b2-46fa-be92-1179282ed7ca)
+
+
+***A table comprising of the worst setup, hold slacks and TNS from the reports is shown below:***
+
+![Screenshot from 2024-11-04 19-21-27](https://github.com/user-attachments/assets/90ab0fbd-eebe-40ca-8be5-b888d6f92341)
+
+
+
+
