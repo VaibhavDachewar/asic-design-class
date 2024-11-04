@@ -2458,7 +2458,7 @@ Reg2Reg min path:
 
 The max path report indicates Setup Slack while the min path report shows Hold Slack measurements.
 
-<details>
+</details>
 
 <details>
  <summary> TASK-12 </summary>
