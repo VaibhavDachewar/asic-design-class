@@ -2461,7 +2461,7 @@ The max path report indicates Setup Slack while the min path report shows Hold S
 </details>
 
 <details>
- <summary> TASK-12 </summary>
+ <summary> TASK-11 </summary>
 
 ***LAB: PVT Corner Analysis for Synthesized VSDBabySoC using OpenSTA***
 
@@ -2565,6 +2565,7 @@ From the table, we have plotted the below graphs:
 Observation:
 
 1: Worst setup slack - sky130_fd_sc_hd__ss_n40C_1v28 PVT Corner library file
+
 2: Worst hold slack - sky130_fd_sc_hd__ff_n40C_1v95 PVT Corner library file
 
 
