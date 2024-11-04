@@ -2470,7 +2470,7 @@ The STA checks are performed across all the corners to confirm the design meets 
 The worst max path (Setup-critical) corners in the sub-40nm process nodes are usually: ss_LowTemp_LowVolt, ss_HighTemp_LowVolt (Slowest corners)
 The worst min path (Hold-critical) corners being: ff_LowTemp_HighVolt,ff_HighTemp_HighVolt (Fastest corners).
 
-***The below tcl script ```sta_pvt.tcl``` can be run to performt the STA across the PVT corners for which the sky130 lib files are available:***
+***The below tcl script ```sta_pvt.tcl``` can be run to perform the STA across the PVT corners for which the sky130 lib files are available:***
 
 ```
 set list_of_lib_files(1) "sky130_fd_sc_hd__tt_025C_1v80.lib"
