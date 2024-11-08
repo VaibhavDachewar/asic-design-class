@@ -2520,46 +2520,109 @@ report_wns -digits {4} >> /mnt/sta_output/sta_wns.txt
 ***The SDC file used for generating clock and data constraints is given below:***
 
 ```
-set PERIOD 9.95
-set_units -time ns
-create_clock [get_pins {pll/CLK}] -name clk -period $PERIOD
-set_clock_uncertainty [expr 0.05 * $PERIOD] -setup [get_clocks clk]
-set_clock_uncertainty [expr 0.08 * $PERIOD] -hold [get_clocks clk]
-set_clock_transition [expr 0.05 * $PERIOD] [get_clocks clk]
+# Create clock with new period
+create_clock [get_pins pll/CLK] -name clk -period 9.95 -waveform {0 4.975}
 
+# Set loads
+set_load -pin_load 0.5 [get_ports OUT]
+set_load -min -pin_load 0.5 [get_ports OUT]
 
-set_input_transition [expr $PERIOD * 0.08] [get_ports ENB_CP]
-set_input_transition [expr $PERIOD * 0.08] [get_ports ENB_VCO]
-set_input_transition [expr $PERIOD * 0.08] [get_ports REF]
-set_input_transition [expr $PERIOD * 0.08] [get_ports VCO_IN]
-set_input_transition [expr $PERIOD * 0.08] [get_ports VREFH]
+# Set clock latency
+set_clock_latency 1 [get_clocks clk]
+set_clock_latency -source 2 [get_clocks clk]
+
+# Set clock uncertainty
+set_clock_uncertainty 0.4975 [get_clocks clk]  ; # 5% of clock period for setup
+set_clock_uncertainty -hold 0.796 [get_clocks clk] ; # 8% of clock period for hold
+
+# Set maximum delay
+set_max_delay 10.05 -from [get_pins dac/OUT] -to [get_ports OUT]
+
+# Set input delay for VCO_IN
+set_input_delay -clock clk -max 4 [get_ports VCO_IN]
+set_input_delay -clock clk -min 1 [get_ports VCO_IN]
+
+# Set input delay for ENb_VCO
+set_input_delay -clock clk -max 4 [get_ports ENb_VCO]
+set_input_delay -clock clk -min 1 [get_ports ENb_VCO]
+
+# Set input delay for ENb_CP
+set_input_delay -clock clk -max 4 [get_ports ENb_CP]
+set_input_delay -clock clk -min 1 [get_ports ENb_CP]
+
+# Set input transition for VCO_IN
+set_input_transition -max 0.4975 [get_ports VCO_IN] ; # 5% of clock
+set_input_transition -min 0.796 [get_ports VCO_IN] ; # adjust if needed
+
+# Set input transition for ENb_VCO
+set_input_transition -max 0.4975 [get_ports ENb_VCO] ; # 5% of clock
+set_input_transition -min 0.796 [get_ports ENb_VCO] ; # adjust if needed
+
+# Set input transition for ENb_CP
+set_input_transition -max 0.4975 [get_ports ENb_CP] ; # 5% of clock
+set_input_transition -min 0.796 [get_ports ENb_CP] ; # adjust if needed
 ```
 
 ***Run below commands on terminal to source the sta_pvt.tcl file***
 
-![Screenshot from 2024-11-03 14-31-26](https://github.com/user-attachments/assets/0b79899f-a9b2-46fa-be92-1179282ed7ca)
+![Screenshot from 2024-11-09 01-48-26](https://github.com/user-attachments/assets/faa27cec-0d1a-48de-9ad9-a157e69f0be0)
+
 
 
 ***A table comprising of the worst setup, hold slacks and TNS from the reports is shown below:***
 
-![Screenshot from 2024-11-04 19-21-27](https://github.com/user-attachments/assets/90ab0fbd-eebe-40ca-8be5-b888d6f92341)
+| Library                                      | WNS     | Worst Min Slack (or) Worst Hold Slack | TNS     | Worst Max Slack (or) Worst Setup Slack |
+|----------------------------------------------|---------|--------------------------------------|---------|----------------------------------------|
+| sky130_fd_sc_hd__tt_025C_1v80.lib            | 0.0000  | -0.4864                              | 0.0000  | 0.3917                                 |
+| sky130_fd_sc_hd__tt_100C_1v80.lib            | 0.0000  | -0.4815                              | 0.0000  | 0.5460                                 |
+| sky130_fd_sc_hd__ff_100C_1v65.lib            | 0.0000  | -0.5469                              | 0.0000  | 2.5070                                 |
+| sky130_fd_sc_hd__ff_100C_1v95.lib            | 0.0000  | -0.6000                              | 0.0000  | 4.0193                                 |
+| sky130_fd_sc_hd__ff_n40C_1v56.lib            | 0.0000  | -0.5045                              | 0.0000  | 0.7306                                 |
+| sky130_fd_sc_hd__ff_n40C_1v65.lib            | 0.0000  | -0.5409                              | 0.0000  | 1.8637                                 |
+| sky130_fd_sc_hd__ff_n40C_1v76.lib            | 0.0000  | -0.5717                              | 0.0000  | 2.8826                                 |
+| sky130_fd_sc_hd__ff_n40C_1v95.lib            | 0.0000  | -0.6085                              | 0.0000  | 4.0444                                 |
+| sky130_fd_sc_hd__ss_100C_1v40.lib            | -18.6691| 0.1093                               | -3124.0125| -18.6691                              |
+| sky130_fd_sc_hd__ss_100C_1v60.lib            | -9.4215 | -0.1540                              | -1232.7720| -9.4215                               |
+| sky130_fd_sc_hd__ss_n40C_1v28.lib            | -64.1107| 1.0336                               | -14859.7744| -64.1107                             |
+| sky130_fd_sc_hd__ss_n40C_1v35.lib            | -41.2445| 0.5515                               | -8823.7441| -41.2445                             |
+| sky130_fd_sc_hd__ss_n40C_1v40.lib            | -31.2412| 0.3289                               | -6218.5728| -31.2412                             |
+| sky130_fd_sc_hd__ss_n40C_1v44.lib            | -25.4554| 0.1949                               | -4771.8467| -25.4554                             |
+| sky130_fd_sc_hd__ss_n40C_1v60.lib            | -12.1565| -0.1332                              | -1743.6814| -12.1565                             |
+| sky130_fd_sc_hd__ss_n40C_1v76.lib            | -5.9294 | -0.2922                              | -639.6851 | -5.9294                              |
+
+
+
 
 From the table, we have plotted the below graphs:
 
-***1: Worst Setup Slack (WNS):***
+***1: WNS:***
 
 
-![Worst Setup Slack_V](https://github.com/user-attachments/assets/98b5b4ff-2c50-45a1-98dc-9d6c23d6e01b)
-
-***2: Worst Hold Slack (WHS):***
+![WNS_plot](https://github.com/user-attachments/assets/9a132e8c-bdde-4771-96b5-c88e4d2d79c9)
 
 
-![Worst Hold Slack_V](https://github.com/user-attachments/assets/243fe5b2-561a-4861-86d2-f84b0a06f04e)
+
+
+
+***2: Worst min slack (or) Worst Hold slack***
+
+
+![Worst_Min_Slack_plot](https://github.com/user-attachments/assets/38bc652f-b0a3-4986-98d6-01ed6ca533cf)
+
 
 
 ***3: Total Negative Slack (TNS)***
 
-![TNS_V](https://github.com/user-attachments/assets/d6d64704-e908-4fa4-9c6a-8406406e3459)
+
+![TNS_plot](https://github.com/user-attachments/assets/bbd3467c-1f7e-44ab-828e-f4720f6c3745)
+
+
+
+***4: Worst max slack (or) Worst Setup slack***
+
+
+![Worst_Max_Slack_plot](https://github.com/user-attachments/assets/3e944497-b026-405a-9d5c-907595d250fe)
+
 
 
 Observation:
