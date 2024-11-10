@@ -2631,4 +2631,86 @@ Observation:
 
 2: Worst hold slack - sky130_fd_sc_hd__ff_n40C_1v95 PVT Corner library file
 
+</details>
 
+<details>
+ <summary> TASK-12 </summary>
+
+# Advanced Physical Design Using Openlane/Sky130 Wokshop
+
+<details>
+ <summary> Day-1 </summary>
+
+## Inception of open-source EDA, OpenLANE and Sky130 PDK:
+
+
+Tasks:
+
+1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
+
+2. Calculate the flop ratio.
+
+The Flop ratio can be calculated as follows:
+
+```
+Flop Ratio = Number of D Flip-Flops/ Total Number of Cells
+	Percentage of Flip Flops = Flop Ratio * 100
+```
+
+
+## 1.  Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs
+
+Commands to invoke the OpenLANE flow and perform floorplan -
+
+```
+# Change directory to openlane flow directory
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# alias docker='docker run -it -v $(pwd):/openLANE_flow -v $PDK_ROOT:$PDK_ROOT -e PDK_ROOT=$PDK_ROOT -u $(id -u $USER):$(id -g $USER) efabless/openlane:v0.21'
+# Since we have aliased the long command to 'docker' we can invoke the OpenLANE flow docker sub-system by just running this command
+docker
+```
+
+```
+# Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
+./flow.tcl -interactive
+
+# Now that OpenLANE flow is open we have to input the required packages for proper functionality of the OpenLANE flow
+package require openlane 0.9
+
+# Now the OpenLANE flow is ready to run any design and initially we have to prep the design creating some necessary files and directories for running a specific design which in our case is 'picorv32a'
+prep -design picorv32a
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+
+# Now we can run floorplan
+run_floorplan
+```
+ 
+Screenshots of running each commands -
+
+
+![Screenshot 2024-11-10 235419](https://github.com/user-attachments/assets/fb37b0a2-e62c-4710-be55-05b677be698a)
+
+
+![Screenshot 2024-11-10 235625](https://github.com/user-attachments/assets/fab4766a-71b0-4b1d-b70e-40b4a7780c3f)
+
+
+![Screenshot 2024-11-11 001955](https://github.com/user-attachments/assets/da59d0b3-a3ff-45a5-b06e-7cd7754f689d)
+
+![Screenshot 2024-11-11 002354](https://github.com/user-attachments/assets/5aa03c06-3a1d-4bad-ac96-177563b3ef93)
+
+
+![Screenshot 2024-11-11 002411](https://github.com/user-attachments/assets/776e0c46-1333-4377-8479-4a7676d620a4)
+
+## Date: 10-11_18-25
+
+![Screenshot 2024-11-11 003811](https://github.com/user-attachments/assets/8eedcf39-ef7f-4f6b-a152-26baf2c4b5c0)
+
+Calculation of Flop Ratio and DFF % from synthesis statistics report file
+
+```
+Flop Ratio = 1613/14876 = 0.108429685
+    Percentage of Flip Flops = 0.108429685 ∗ 100 = 10.84296854%
+```
