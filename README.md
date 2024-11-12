@@ -2714,3 +2714,155 @@ Calculation of Flop Ratio and DFF % from synthesis statistics report file
 Flop Ratio = 1613/14876 = 0.108429685
     Percentage of Flip Flops = 0.108429685 ∗ 100 = 10.84296854%
 ```
+
+</details>
+
+<details>
+ <summary> Day-2 </summary>
+
+ ## Good floorplan vs bad floorplan and introduction to library cells
+ 
+**Tasks:**
+
+1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
+2. Calculate the die area in microns from the values in floorplan def.
+3. Load generated floorplan def in magic tool and explore the floorplan.
+4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate 
+   necessary outputs.
+5. Load generated placement def in magic tool and explore the placement. Area of Die in 
+   microns = Die width in microns ∗ Die height in microns
+   
+***1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs***
+
+Commands to invoke the OpenLANE flow and perform floorplan
+
+```
+# Change directory to openlane flow directory
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# alias docker='docker run -it -v $(pwd):/openLANE_flow -v $PDK_ROOT:$PDK_ROOT -e PDK_ROOT=$PDK_ROOT -u $(id -u $USER):$(id -g $USER) efabless/openlane:v0.21'
+# Since we have aliased the long command to 'docker' we can invoke the OpenLANE flow docker sub-system by just running this command
+docker
+```
+
+```
+# Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
+./flow.tcl -interactive
+
+# Now that OpenLANE flow is open we have to input the required packages for proper functionality of the OpenLANE flow
+package require openlane 0.9
+
+# Now the OpenLANE flow is ready to run any design and initially we have to prep the design creating some necessary files and directories for running a specific design which in our case is 'picorv32a'
+prep -design picorv32a
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+
+# Now we can run floorplan
+run_floorplan
+```
+***Screenshot of floorplan run***
+
+![Screenshot 2024-11-12 230418](https://github.com/user-attachments/assets/3ed1f9a5-aa2d-46d7-b0c2-c92daf977f40)
+
+![Screenshot 2024-11-12 230511](https://github.com/user-attachments/assets/c515f353-67d7-4bc6-9e87-353945ee8330)
+
+
+***2. Calculate the die area in microns from the values in floorplan def.***
+
+![Screenshot 2024-11-12 235300](https://github.com/user-attachments/assets/c1a8c769-c1d0-4568-b4c8-8557708ffe7c)
+
+![Screenshot 2024-11-12 231625](https://github.com/user-attachments/assets/cf05ef5b-beb0-4fbe-9fee-a9b78824e305)
+
+## Floorplan DEF Analysis
+
+According to the floorplan DEF:
+
+- **1000 Unit Distance**: 1 Micron
+- **Die Width in Unit Distance**: \(660685 - 0 = 660685\)
+- **Die Height in Unit Distance**: \(671405 - 0 = 671405\)
+- **Distance in Microns**: Value in Unit Distance / 1000
+
+### Calculated Die Dimensions in Microns:
+- **Die Width**: \(660685/1000 = 660.685\) Microns
+- **Die Height**: \(671405/1000 = 671.405\) Microns
+- **Area of Die in Square Microns**:
+  \[
+  660.685 * 671.405 = 443587.212425 Square Microns
+  \]
+
+***Load generated floorplan def in magic tool and explore the floorplan.***
+
+Commands to load floorplan def in magic in another terminal
+
+```
+# Change directory to path containing generated floorplan def
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-11_17-31/results/floorplan/
+
+# Command to load the floorplan def in magic tool
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+```
+
+![Screenshot 2024-11-12 232001](https://github.com/user-attachments/assets/3a96caf9-5764-4042-8028-dc8e3895ab13)
+
+***Equidistant placement of ports:***
+
+
+![Screenshot 2024-11-12 232435](https://github.com/user-attachments/assets/ef231500-fa5d-46f4-b1bb-40e055cd86f1)
+
+**Port layer as set through config.tcl**
+
+![Screenshot 2024-11-12 234047](https://github.com/user-attachments/assets/8e4de56f-f7fb-47fa-a951-d2b804b6a877)
+
+![Screenshot 2024-11-12 234146](https://github.com/user-attachments/assets/24f46e44-5696-4436-ba27-a121344271d4)
+
+**Decap Cells and Tap Cells**
+
+![Screenshot 2024-11-12 234453](https://github.com/user-attachments/assets/8b0d11c4-d61d-4a3e-a0f5-5948d9f83e2f)
+
+**Diogonally equidistant Tap cells**
+
+![Screenshot 2024-11-12 234608](https://github.com/user-attachments/assets/fc08eddc-6340-45b4-9d3c-5cd534c78ad5)
+
+**Unplaced standard cells at the origin**
+
+![Screenshot 2024-11-12 234727](https://github.com/user-attachments/assets/6557ee36-e85a-490c-9c55-cc3ab64f5f1d)
+
+***4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs. Command to run placement***
+
+
+```
+# Congestion aware placement by default
+run_placement
+
+```
+
+
+![Screenshot 2024-11-12 235402](https://github.com/user-attachments/assets/03fdd702-9fa0-4308-a26d-a1090aab7769)
+
+***5. Load generated placement def in magic tool and explore the placement. Commands to load placement def in magic in another terminal***
+
+```
+# Change directory to path containing generated placement def
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-11_17-31/results/placement/
+
+# Command to load the placement def in magic tool
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+```
+![Screenshot 2024-11-13 000448](https://github.com/user-attachments/assets/1427e415-5d3e-4418-a800-16d9ae6eef4a)
+
+
+![Screenshot 2024-11-13 000500](https://github.com/user-attachments/assets/e35a7aa6-a18e-467c-b5ce-c0ebbffa1681)
+
+**Standard cells legally placed**
+
+![Screenshot 2024-11-13 000537](https://github.com/user-attachments/assets/726887ed-33e2-45cb-824d-49ed8250f30a)
+
+</details>
+
+<details>
+ <summary> Day-3 </summary>
+
+## Design Library Cell Using Magic Layout and Cell characterization:
+
+
