@@ -3006,8 +3006,165 @@ Rise transition time calculation Rise Transition Time = Time taken for output to
 Rise Transition Time = 2.2389 - 2.1792 = 0.0597 ns = 59.70 ps
 ```
 
+Fall Transition Time = Time taken for output to fall to 80% − Time taken for output to fall to 20% 20% of output (3.3V) = 0.66V 20% of output (3.3V) = 2.64V
+
+20% Screenshots
 
 
+![Screenshot 2024-11-13 145715](https://github.com/user-attachments/assets/ee6cc6d6-fa8a-419b-b801-9b6fc0908e1b)
+
+![Screenshot 2024-11-13 145741](https://github.com/user-attachments/assets/7786b21c-8eea-4c98-ada4-60c1321ebc07)
+
+80% Screenshots
+
+![Screenshot 2024-11-13 145903](https://github.com/user-attachments/assets/c9659fcb-681a-4eb9-9892-2dfaac3eb5cb)
+
+```
+Fall Transition Time = 4.0931 - 4.05 = 0.0431 ns = 43.10 ps
+```
+
+Rise Cell Delay Calculation Rise cell delay = Time taken by output to rise to 50% − Time taken by input to fall to 50% 50 % of 3.3V = 1.65V
+
+50% Screenshots
+
+
+![Screenshot 2024-11-13 150529](https://github.com/user-attachments/assets/63779075-483c-45fb-bc43-182b73c8cb1d)
+
+
+![Screenshot 2024-11-13 150539](https://github.com/user-attachments/assets/21c30a73-8da9-40f1-bad2-0d82202916a8)
+
+```
+Rise cell delay = 2.20787 - 2.14944 = 0.05843 ns = 58.43 ps
+```
+Fall Cell Delay Calculation Fall cell delay = Time taken by output to fall to 50% − Time taken by input to rise to 50% 50 % of 3.3V = 1.65V
+
+50% Screenshots
+
+![Screenshot 2024-11-13 151302](https://github.com/user-attachments/assets/b4a96aca-3ebb-46c4-979a-a22f948c41aa)
+
+![Screenshot 2024-11-13 151323](https://github.com/user-attachments/assets/e539f012-4e4a-41c9-8fa0-94043b0d6964)
+
+```
+Fall cell delay = 4.07656 - 4.04844 = 0.02818 ns = 28.12 ps
+```
+
+***6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.***
+
+Link to Sky130 Periphery rules: https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html
+
+Commands to download and view the corrupted skywater process magic tech file and associated files to perform drc corrections
+
+```
+# Change to home directory
+cd
+
+# Command to download the lab files
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+
+# Since lab file is compressed command to extract it
+tar xfz drc_tests.tgz
+
+# Change directory into the lab folder
+cd drc_tests
+
+# List all files and directories present in the current directory
+ls -al
+
+# Command to view .magicrc file
+gvim .magicrc
+
+# Command to open magic tool in better graphics
+magic -d XR &
+
+```
+
+Screenshots of commands run
+
+![Screenshot 2024-11-13 152210](https://github.com/user-attachments/assets/625ecad7-dc51-4a58-9f47-f96c5b3d42cd)
+
+![Screenshot 2024-11-13 152229](https://github.com/user-attachments/assets/64abf6ce-17d7-4d77-b503-f4a08aead20b)
+
+Screenshot of .magicrc file
+
+![Screenshot 2024-11-13 152323](https://github.com/user-attachments/assets/b202d7ee-5956-4cf7-a167-161608621f8e)
+
+Incorrectly implemented poly.9 simple rule correction
+
+Screenshot of poly rules
+
+![Screenshot 2024-11-13 152501](https://github.com/user-attachments/assets/4356b64e-bbcc-4cea-bbf3-c67b7c1255c2)
+
+
+Incorrectly implemented poly.9 rule no drc violation even though spacing < 0.48u
+
+![Screenshot 2024-11-13 153123](https://github.com/user-attachments/assets/3b846e57-b91f-41e7-98c7-04338bfac4d1)
+
+
+![Screenshot 2024-11-13 155239](https://github.com/user-attachments/assets/1f3cabc9-359b-46b6-9e36-9d68da396df8)
+
+New commands inserted in sky130A.tech file to update drc
+
+
+![Screenshot 2024-11-13 160118](https://github.com/user-attachments/assets/80e27ecb-15c7-4c9c-876d-a46c8434916c)
+
+
+![Screenshot 2024-11-13 160910](https://github.com/user-attachments/assets/45cf6f6d-4642-49c8-a18d-a4a66f766e3d)
+
+Commands to run in tkcon window
+
+```
+# Loading updated tech file
+tech load sky130A.tech
+
+# Must re-run drc check to see updated drc errors
+drc check
+
+# Selecting region displaying the new errors and getting the error messages 
+drc why
+```
+
+Screenshot of magic window with rule implemented
+
+
+![Screenshot 2024-11-13 163017](https://github.com/user-attachments/assets/4966ebb7-c48a-482e-8b46-65150fc877a0)
+
+Incorrectly implemented difftap.2 simple rule correction
+
+Screenshot of difftap rules
+
+![Screenshot 2024-11-13 163513](https://github.com/user-attachments/assets/7dfa311c-8408-437e-a361-a9e34c37e656)
+
+Incorrectly implemented -
+
+![Screenshot 2024-11-13 164153](https://github.com/user-attachments/assets/a7e55c52-11ed-448c-bba0-70913f67f26b)
+
+Commands to run in tkcon window
+
+```
+# Loading updated tech file
+tech load sky130A.tech
+
+# Change drc style to drc full
+drc style drc(full)
+
+# Must re-run drc check to see updated drc errors
+drc check
+
+# Selecting region displaying the new errors and getting the error messages 
+drc why
+```
+
+Screenshot of magic window with rule implemented showing ```no errors found```
+
+![Screenshot 2024-11-13 161945](https://github.com/user-attachments/assets/3187c11f-9ee7-46a5-b372-b63757bc8691)
+
+
+</details>
+
+<details>
+ <summary> Day-4 </summary>
+
+## Pre-Layout timing analysis and Importance of good clock tree:
 
 
 
