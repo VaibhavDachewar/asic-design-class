@@ -3846,10 +3846,10 @@ Commands to be run in OpenLANE flow to do OpenROAD timing analysis with integrat
 openroad
 
 # Reading lef file
-read_lef /openLANE_flow/designs/picorv32a/runs/19-11_19-21/tmp/merged.lef
+read_lef /openLANE_flow/designs/picorv32a/runs/13-11_19-21/tmp/merged.lef
 
 # Reading def file
-read_def /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/cts/picorv32a.cts.def
+read_def /openLANE_flow/designs/picorv32a/runs/13-11_19-21/results/cts/picorv32a.cts.def
 
 # Creating an OpenROAD database to work with
 write_db pico_cts.db
@@ -3858,7 +3858,7 @@ write_db pico_cts.db
 read_db pico_cts.db
 
 # Read netlist post CTS
-read_verilog /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/synthesis/picorv32a.synthesis_cts.v
+read_verilog /openLANE_flow/designs/picorv32a/runs/13-11_19-21/results/synthesis/picorv32a.synthesis_cts.v
 
 # Read library for design
 read_liberty $::env(LIB_SYNTH_COMPLETE)
@@ -3906,7 +3906,7 @@ echo $::env(CTS_CLK_BUFFER_LIST)
 echo $::env(CURRENT_DEF)
 
 # Setting def as placement def
-set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/placement/picorv32a.placement.def
+set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/13-11_19-21/results/placement/picorv32a.placement.def
 
 # Run CTS again
 run_cts
@@ -3918,10 +3918,10 @@ echo $::env(CTS_CLK_BUFFER_LIST)
 openroad
 
 # Reading lef file
-read_lef /openLANE_flow/designs/picorv32a/runs/24-03_10-03/tmp/merged.lef
+read_lef /openLANE_flow/designs/picorv32a/runs/13-11_19-21/tmp/merged.lef
 
 # Reading def file
-read_def /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/cts/picorv32a.cts.def
+read_def /openLANE_flow/designs/picorv32a/runs/13-11_19-21/results/cts/picorv32a.cts.def
 
 # Creating an OpenROAD database to work with
 write_db pico_cts1.db
@@ -3930,7 +3930,7 @@ write_db pico_cts1.db
 read_db pico_cts.db
 
 # Read netlist post CTS
-read_verilog /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/synthesis/picorv32a.synthesis_cts.v
+read_verilog /openLANE_flow/designs/picorv32a/runs/13-11_19-21/results/synthesis/picorv32a.synthesis_cts.v
 
 # Read library for design
 read_liberty $::env(LIB_SYNTH_COMPLETE)
@@ -3965,11 +3965,24 @@ set ::env(CTS_CLK_BUFFER_LIST) [linsert $::env(CTS_CLK_BUFFER_LIST) 0 sky130_fd_
 # Checking current value of 'CTS_CLK_BUFFER_LIST'
 echo $::env(CTS_CLK_BUFFER_LIST)
 
-
 ```
 
+Screenshots of commands run and timing report generated
 
+![Screenshot 2024-11-14 022316](https://github.com/user-attachments/assets/7133f4e2-d26c-4cae-9de9-84085a2dcab5)
 
+![Screenshot 2024-11-14 022413](https://github.com/user-attachments/assets/916b4afb-ee72-48c2-9ca2-c15485296e35)
+
+![Screenshot 2024-11-14 022624](https://github.com/user-attachments/assets/0c6445e3-ed5f-4d0b-bcdb-d9c602eba7a5)
+
+![Screenshot 2024-11-14 022640](https://github.com/user-attachments/assets/2887ebb4-b70d-46cb-a6c9-46559772c040)
+
+![Screenshot 2024-11-14 022956](https://github.com/user-attachments/assets/3a5bf061-2fdc-4731-9cbb-f5c79b5969b1)
+
+</details>
+
+<details>
+ <summary> Day-5 </summary>
 
 
 
