@@ -3166,12 +3166,6 @@ Screenshot of magic window with rule implemented showing ```no errors found```
 
 ## Pre-Layout timing analysis and Importance of good clock tree:
 
-</details>
-
-<details>
- <summary> Day-4 </summary>
-
-## Pre-layout timing analysis and importance of good clock tree
 
 Implementation
 
