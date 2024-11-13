@@ -3978,6 +3978,217 @@ Screenshots of commands run and timing report generated
 <details>
  <summary> Day-5 </summary>
 
+Final steps for RTL2GDS using tritonRoute and openSTA
+
+## Theory
+
+Implementation
+
+Tasks:-
+
+1. Perform generation of Power Distribution Network (PDN) and explore the PDN layout.
+2. Perfrom detailed routing using TritonRoute.
+3. Post-Route parasitic extraction using SPEF extractor.
+4. Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
+
+***1. Perform generation of Power Distribution Network (PDN) and explore the PDN layout.***
+
+Commands to perform all necessary stages up until now
+```
+# Change directory to openlane flow directory
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# alias docker='docker run -it -v $(pwd):/openLANE_flow -v $PDK_ROOT:$PDK_ROOT -e PDK_ROOT=$PDK_ROOT -u $(id -u $USER):$(id -g $USER) efabless/openlane:v0.21'
+# Since we have aliased the long command to 'docker' we can invoke the OpenLANE flow docker sub-system by just running this command
+docker
+
+# Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
+./flow.tcl -interactive
+
+# Now that OpenLANE flow is open we have to input the required packages for proper functionality of the OpenLANE flow
+package require openlane 0.9
+
+# Now the OpenLANE flow is ready to run any design and initially we have to prep the design creating some necessary files and directories for running a specific design which in our case is 'picorv32a'
+prep -design picorv32a
+
+# Addiitional commands to include newly added lef to openlane flow merged.lef
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+# Command to set new value for SYNTH_STRATEGY
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+
+# Command to set new value for SYNTH_SIZING
+set ::env(SYNTH_SIZING) 1
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+
+# Following commands are alltogather sourced in "run_floorplan" command
+init_floorplan
+place_io
+tap_decap_or
+
+# Now we are ready to run placement
+run_placement
+
+# Incase getting error
+unset ::env(LIB_CTS)
+
+# With placement done we are now ready to run CTS
+run_cts
+
+# Now that CTS is done we can do power distribution network
+gen_pdn 
+
+```
+
+Screenshots of power distribution network run
+
+![Screenshot 2024-11-14 023535](https://github.com/user-attachments/assets/f65fb3d8-5c19-47a4-9d95-936256b93851)
+
+
+![Screenshot 2024-11-14 024311](https://github.com/user-attachments/assets/d937d9a5-a2ba-49ba-b4fc-f0dec8adcb96)
+
+Commands to load PDN def in magic in another terminal
+
+```
+# Change directory to path containing generated PDN def
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/13-11_21-04/tmp/floorplan/
+
+# Command to load the PDN def in magic tool
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read 14-pdn.def &
+
+```
+
+![Screenshot 2024-11-14 024724](https://github.com/user-attachments/assets/1e3d063e-418a-4e30-bf70-f48937f293fd)
+
+
+Screenshots of PDN def
+
+
+![Screenshot 2024-11-14 024736](https://github.com/user-attachments/assets/94b95231-700e-4b86-8b39-06655973cd48)
+
+
+![Screenshot 2024-11-14 025559](https://github.com/user-attachments/assets/d5a7e5b4-e663-46cc-a13e-b4bc6826146a)
+
+![Screenshot 2024-11-14 025709](https://github.com/user-attachments/assets/d4fa6285-e6ac-4529-a7d9-f777524b7a77)
+
+
+2. Perfrom detailed routing using TritonRoute and explore the routed layout.
+   
+Command to perform routing
+```
+# Check value of 'CURRENT_DEF'
+echo $::env(CURRENT_DEF)
+
+# Check value of 'ROUTING_STRATEGY'
+echo $::env(ROUTING_STRATEGY)
+
+# Command for detailed route using TritonRoute
+run_routing
+
+```
+
+Screenshots of routing run
+
+
+![Screenshot 2024-11-14 025929](https://github.com/user-attachments/assets/57fe803c-987f-45e0-a150-c952e3a57c9b)
+
+![Screenshot 2024-11-14 031351](https://github.com/user-attachments/assets/4d77e761-947c-4606-93ae-4f9c64d06d3f)
+
+![Screenshot 2024-11-14 031416](https://github.com/user-attachments/assets/942c3c48-a2b0-469f-a7d6-a429c205f179)
+
+
+Commands to load routed def in magic in another terminal
+
+```
+# Change directory to path containing routed def
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/13-11_21-04/results/routing/
+
+# Command to load the routed def in magic tool
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.def &
+
+```
+
+
+![Screenshot 2024-11-14 031838](https://github.com/user-attachments/assets/d2325678-8063-4b5b-957b-f5a56bf7ac52)
+
+Screenshots of routed def
+
+
+![Screenshot 2024-11-14 031903](https://github.com/user-attachments/assets/22219c99-8c99-42a1-a6e9-d905570f92cb)
+
+![Screenshot 2024-11-14 031931](https://github.com/user-attachments/assets/2948dce1-b2f1-4f24-a9ed-0dd82b4b1c50)
+
+![Screenshot 2024-11-14 032035](https://github.com/user-attachments/assets/cb640963-cbe5-4a9e-9aa7-33bc4d94a702)
+
+
+Screenshot of fast route guide present in openlane/designs/picorv32a/runs/26-03_08-45/tmp/routing directory
+
+
+![Screenshot 2024-11-14 032420](https://github.com/user-attachments/assets/cd797fdc-6171-4327-a63d-b5324886e6a5)
+
+
+4. Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
+Commands to be run in OpenLANE flow to do OpenROAD timing analysis with integrated OpenSTA in
+
+```
+OpenROAD
+
+# Command to run OpenROAD tool
+openroad
+
+# Reading lef file
+read_lef /openLANE_flow/designs/picorv32a/runs/26-03_08-45/tmp/merged.lef
+
+# Reading def file
+read_def /openLANE_flow/designs/picorv32a/runs/26-03_08-45/results/routing/picorv32a.def
+
+# Creating an OpenROAD database to work with
+write_db pico_route.db
+
+# Loading the created database in OpenROAD
+read_db pico_route.db
+
+# Read netlist post CTS
+read_verilog /openLANE_flow/designs/picorv32a/runs/26-03_08-45/results/synthesis/picorv32a.synthesis_preroute.v
+
+# Read library for design
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+
+# Link design and library
+link_design picorv32a
+
+# Read in the custom sdc we created
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+
+# Setting all cloks as propagated clocks
+set_propagated_clock [all_clocks]
+
+# Read SPEF
+read_spef /openLANE_flow/designs/picorv32a/runs/26-03_08-45/results/routing/picorv32a.spef
+
+# Generating custom timing report
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+
+# Exit to OpenLANE flow
+exit
+```
+
+Screenshots of commands run and timing report generated
+
+
+![Screenshot 2024-11-14 033355](https://github.com/user-attachments/assets/0c31aba2-2a4e-452f-b7c8-5e6c050fc37f)
+
+
+![Screenshot 2024-11-14 033403](https://github.com/user-attachments/assets/5d52a2c3-b00f-4615-9cb0-83b88801c4e9)
+
+![Screenshot 2024-11-14 033413](https://github.com/user-attachments/assets/3a11b2ea-36c5-451d-adad-f157144ea99a)
+
+![Screenshot 2024-11-14 033425](https://github.com/user-attachments/assets/f1b3baee-0c57-47c7-b5f3-167e2cb20a2c)
+
+
 
 
 
