@@ -2894,15 +2894,17 @@ cp /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/
 ls
 
 # Command to open custom inverter layout in magic
-magic -T sky130A.tech sky130_inv.mag &
+magic -T sky130A.tech sky130_vaiinv.mag &
 ```
-![Screenshot 2024-11-13 111509](https://github.com/user-attachments/assets/4e585c17-ffe9-4560-9411-c8793154220e)
 
 ***2.Load the custom inverter layout in magic and explore.***
 
 Screenshot of custom inverter layout in magic
 
-![Screenshot 2024-11-13 111534](https://github.com/user-attachments/assets/30d22557-e3a3-42f3-ad83-deca97679316)
+![Screenshot 2024-11-14 114841](https://github.com/user-attachments/assets/122fa962-888c-4291-9147-f16154908085)
+
+![Screenshot 2024-11-14 115506](https://github.com/user-attachments/assets/f73cb902-7be6-4a43-9245-4068770393c4)
+
 
 NMOS and PMOS identified
 
@@ -2913,15 +2915,19 @@ NMOS and PMOS identified
 
 Output Y connectivity to PMOS and NMOS drain verified
 
-![Screenshot 2024-11-13 112559](https://github.com/user-attachments/assets/8ab9cf59-9dfe-4dec-b8d8-5f60ec733e01)
+![Screenshot 2024-11-14 121142](https://github.com/user-attachments/assets/147a301c-3c2a-4ca2-a87b-20cb1fb7388f)
+
+
 
 PMOS source connectivity to VDD (here VPWR) verified
 
-![Screenshot 2024-11-13 112636](https://github.com/user-attachments/assets/37b4e5bb-92b9-4ca6-9c70-694514ee145a)
+![Screenshot 2024-11-14 121240](https://github.com/user-attachments/assets/352ebfb9-0781-4da5-9367-0ef68cec13d3)
+
 
 NMOS source connectivity to VSS (here VGND) verified
 
-![Screenshot 2024-11-13 112724](https://github.com/user-attachments/assets/86b87b07-5678-4143-b538-2adaf5dd33fc)
+![Screenshot 2024-11-14 121324](https://github.com/user-attachments/assets/d8afedb5-7400-4b77-b75d-667540ad2fa3)
+
 
 Deleting necessary layout part to see DRC error
 
@@ -2948,24 +2954,27 @@ ext2spice
 
 Screenshot of tkcon window after running above commands
 
-![Screenshot 2024-11-13 122149](https://github.com/user-attachments/assets/e2dd200e-85bb-4282-a938-ceea35956182)
+![Screenshot 2024-11-14 121558](https://github.com/user-attachments/assets/4546a136-74fb-4f17-94d5-07543da5c1a0)
+
 
 Screenshot of created spice file
 
-![Screenshot 2024-11-13 122241](https://github.com/user-attachments/assets/9ea08c2b-198f-43cf-80ce-dab5de1ffc1f)
+![Screenshot 2024-11-14 121808](https://github.com/user-attachments/assets/227da811-e527-4735-8b94-c275063cbe69)
 
+![Screenshot 2024-11-14 121745](https://github.com/user-attachments/assets/286dde20-fd3b-4613-9a3a-c7c2b7ec1440)
 
-![Screenshot 2024-11-13 122221](https://github.com/user-attachments/assets/42fbff87-6138-42ec-b75e-b683d27a945f)
 
 ***4. Editing the spice model file for analysis through simulation.***
 
 Measuring unit distance in layout grid
 
-![Screenshot 2024-11-13 123851](https://github.com/user-attachments/assets/867fa31c-78b4-421d-8e1c-006de1015c63)
+![Screenshot 2024-11-14 121945](https://github.com/user-attachments/assets/08efd25a-a095-4d18-abf7-e758a79b432b)
+
 
 Final edited spice file ready for ngspice simulation
 
-![Screenshot 2024-11-13 125243](https://github.com/user-attachments/assets/9e6c6d50-3f4b-4fc7-88be-f54c09fbdf6b)
+![Screenshot 2024-11-14 122323](https://github.com/user-attachments/assets/bd465aa6-387f-49c3-8094-abfafab75723)
+
 
 ***5.Post-layout ngspice simulations.***
 
@@ -2973,7 +2982,7 @@ Commands for ngspice simulation
 
 ```
 # Command to directly load spice file for simulation to ngspice
-ngspice sky130_inv.spice
+ngspice sky130_vaiinv.spice
 
 # Now that we have entered ngspice with the simulation spice file loaded we just have to load the plot
 plot y vs time a
@@ -2982,23 +2991,25 @@ plot y vs time a
 
 Screenshots of ngspice run
 
-![Screenshot 2024-11-13 125808](https://github.com/user-attachments/assets/d5fa10ea-7dc0-4014-90e4-c32ef49879e3)
+![Screenshot 2024-11-14 122539](https://github.com/user-attachments/assets/bc07e154-27c0-4655-9e1c-01acceef37ec)
+
 
 Screenshot of generated plot
 
-![Screenshot 2024-11-13 125820](https://github.com/user-attachments/assets/52d00637-9570-4b09-b3bd-47a905eb73d1)
+![Screenshot 2024-11-14 122614](https://github.com/user-attachments/assets/ae24667d-7028-43d7-a4fd-44e6b01fff46)
+
 
 Rise transition time calculation Rise Transition Time = Time taken for output to rise to 80% − Time taken for output to rise to 20% 20% of output (3.3V) = 0.66V 20% of output (3.3V) = 2.64V
 
 20% Screenshots
 
-![Screenshot 2024-11-13 144300](https://github.com/user-attachments/assets/ff048c3e-ebb6-4df4-9455-30cb4f24e678)
+![Screenshot 2024-11-14 122654](https://github.com/user-attachments/assets/a2824a3e-957e-495c-87bc-84ca6329cd63)
 
 ![Screenshot 2024-11-13 144355](https://github.com/user-attachments/assets/847feee7-d87e-4b94-9a35-187bfcc1f3f9)
 
 80% Screenshots
 
-![Screenshot 2024-11-13 145211](https://github.com/user-attachments/assets/5edc732f-cc84-4100-b195-8cd30359d0f7)
+![Screenshot 2024-11-14 123014](https://github.com/user-attachments/assets/c0b107d7-58e6-4956-a630-44cb66763286)
 
 ![Screenshot 2024-11-13 144801](https://github.com/user-attachments/assets/0e488de3-0610-4a96-a5b9-ad1c3d2eafbf)
 
@@ -3010,14 +3021,15 @@ Fall Transition Time = Time taken for output to fall to 80% − Time taken for o
 
 20% Screenshots
 
+![Screenshot 2024-11-14 123044](https://github.com/user-attachments/assets/e33a0ed8-7726-4797-829b-5f0cd4ef5d1a)
 
-![Screenshot 2024-11-13 145715](https://github.com/user-attachments/assets/ee6cc6d6-fa8a-419b-b801-9b6fc0908e1b)
 
 ![Screenshot 2024-11-13 145741](https://github.com/user-attachments/assets/7786b21c-8eea-4c98-ada4-60c1321ebc07)
 
 80% Screenshots
 
-![Screenshot 2024-11-13 145903](https://github.com/user-attachments/assets/c9659fcb-681a-4eb9-9892-2dfaac3eb5cb)
+![Screenshot 2024-11-14 123111](https://github.com/user-attachments/assets/279c1d2e-ed5d-48ae-8df8-4dccac6186ea)
+
 
 ```
 Fall Transition Time = 4.0931 - 4.05 = 0.0431 ns = 43.10 ps
@@ -3028,7 +3040,7 @@ Rise Cell Delay Calculation Rise cell delay = Time taken by output to rise to 50
 50% Screenshots
 
 
-![Screenshot 2024-11-13 150529](https://github.com/user-attachments/assets/63779075-483c-45fb-bc43-182b73c8cb1d)
+![Screenshot 2024-11-14 123138](https://github.com/user-attachments/assets/2c2fc080-a4df-4553-9595-e1ec6561c779)
 
 
 ![Screenshot 2024-11-13 150539](https://github.com/user-attachments/assets/21c30a73-8da9-40f1-bad2-0d82202916a8)
@@ -3040,7 +3052,8 @@ Fall Cell Delay Calculation Fall cell delay = Time taken by output to fall to 50
 
 50% Screenshots
 
-![Screenshot 2024-11-13 151302](https://github.com/user-attachments/assets/b4a96aca-3ebb-46c4-979a-a22f948c41aa)
+![Screenshot 2024-11-14 123201](https://github.com/user-attachments/assets/28d42dd3-d9da-442a-b55d-c17fae21f3ed)
+
 
 ![Screenshot 2024-11-13 151323](https://github.com/user-attachments/assets/e539f012-4e4a-41c9-8fa0-94043b0d6964)
 
