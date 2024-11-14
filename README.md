@@ -3217,7 +3217,7 @@ Commands to open the custom inverter layout.
 cd Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
 
 # Command to open custom inverter layout in magic
-magic -T sky130A.tech sky130_inv.mag &
+magic -T sky130A.tech sky130_vaiinv.mag &
 ```
 
 Screenshot of tracks.info of sky130_fd_sc_hd
@@ -3236,18 +3236,22 @@ grid 0.46um 0.34um 0.23um 0.17um
 
 Screenshot of commands run
 
-![Screenshot 2024-11-13 183121](https://github.com/user-attachments/assets/a28c3d0b-e5ca-4b83-9071-c43f00fffa09)
+![Screenshot 2024-11-14 234316](https://github.com/user-attachments/assets/11b0d053-bf66-4760-b420-3ce313f43ac6)
+
+
 
 Condition 1 verified
 
-![Screenshot 2024-11-13 183458](https://github.com/user-attachments/assets/7d0fdd5f-8efe-49a9-9d74-008bcf38c6e5)
+![Screenshot 2024-11-14 234359](https://github.com/user-attachments/assets/4bc12781-df58-4463-a72f-7f0e706bc96b)
+
 
 Condition 2 verified
 
 Horizontal track pitch = 0.46um
 
 
-![Screenshot 2024-11-13 184457](https://github.com/user-attachments/assets/049b4f38-b121-478c-9257-80c8f00ea3c0)
+![Screenshot 2024-11-14 234610](https://github.com/user-attachments/assets/edb53cfa-0301-4d61-a131-de93adedfae5)
+
 
 width of standard cell = 1.38 um = 0.46*3
 
@@ -3256,7 +3260,8 @@ Condition 3 verified
 
 Vertical track pitch = 0.34um
 
-![Screenshot 2024-11-13 184911](https://github.com/user-attachments/assets/2d63d1d8-131b-439a-a557-b9762251b9eb)
+![Screenshot 2024-11-14 234758](https://github.com/user-attachments/assets/22a89745-4588-4d95-a8b8-34d6e13a457b)
+
 
 width of standard cell = 2.72 um = 0.34*3
 
