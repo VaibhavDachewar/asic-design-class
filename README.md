@@ -3515,6 +3515,10 @@ Screenshot of placement def in magic
 
 ![Screenshot 2024-11-13 213602](https://github.com/user-attachments/assets/3a2feee4-64e8-4f77-a63c-8058b3000aab)
 
+
+![myinv_vaiinv](https://github.com/user-attachments/assets/ad1599d7-1398-4cb4-89b2-c1b00bcc5bbd)
+
+
 ![Screenshot 2024-11-13 223839](https://github.com/user-attachments/assets/d7b4f291-ac8d-4cde-929b-991d25e71cf2)
 
 ***9. Do Post-Synthesis timing analysis with OpenSTA tool.***
