@@ -4668,11 +4668,15 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config_2.mk gui_floorplan
 ![Screenshot 2024-11-25 174937](https://github.com/user-attachments/assets/7d225fb7-b17b-478c-b162-a8a64ace0689)
 
 
+![Screenshot 2024-11-26 040627](https://github.com/user-attachments/assets/21e6a3be-4f9f-4dde-819e-4768ea805445)
 
-![Screenshot 2024-11-25 235907](https://github.com/user-attachments/assets/7d700690-2a37-42cc-af74-f48b0a39634c)
 
 
-![Screenshot 2024-11-25 174956](https://github.com/user-attachments/assets/d0c90195-8fa1-4177-8aeb-c8550c3aa8ec)
+
+![Screenshot 2024-11-26 040704](https://github.com/user-attachments/assets/e104cf54-51b1-4852-a0a8-d715386e7bf0)
+
+
+
 
 #For Placement
 
