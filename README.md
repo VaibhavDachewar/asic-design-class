@@ -4727,6 +4727,50 @@ make gui_cts
 ![Screenshot 2024-11-26 002707](https://github.com/user-attachments/assets/038ec344-ea3c-4c4a-a388-da3441033f57)
 
 
+For Route
+
+```
+sudo make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config_2.mk route
+```
+
+
+![Screenshot 2024-11-26 004333](https://github.com/user-attachments/assets/fa1869ba-9d72-43c9-9f2d-6e2661a8d3cd)
+
+
+```
+make gui_route
+```
+
+
+![Screenshot 2024-11-26 005755](https://github.com/user-attachments/assets/ad81dd58-3264-4278-bfc6-c3849dbc92ad)
+
+
+
+![Screenshot 2024-11-26 005824](https://github.com/user-attachments/assets/e0bf99fd-e1a3-47f3-aa13-112e4303a7f3)
+
+For Final Layout
+
+```
+make gui_final
+```
+
+![Screenshot 2024-11-26 010952](https://github.com/user-attachments/assets/d3f6dacd-fc22-4776-aaed-99270efc1c94)
+
+
+
+![Screenshot 2024-11-26 011016](https://github.com/user-attachments/assets/c5cdd5bb-0e5d-48f5-b64e-3268ef68ed97)
+
+
+![Screenshot 2024-11-26 011202](https://github.com/user-attachments/assets/b83d9b77-c7fe-4a5c-95c6-b8173f8ec4d6)
+
+
+
+![Screenshot 2024-11-26 011743](https://github.com/user-attachments/assets/f7c6c8bc-59f7-4a13-b5f3-f3ab3e145a10)
+
+
+
+
+
 
 
 
