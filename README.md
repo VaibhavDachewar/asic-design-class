@@ -4370,6 +4370,304 @@ Screenshots of commands run and timing report generated
 ![Screenshot 2024-11-14 033425](https://github.com/user-attachments/assets/f1b3baee-0c57-47c7-b5f3-167e2cb20a2c)
 
 
+</details>
+
+</details>
+
+<details>
+ <summary>TASK-13 </summary>
+
+#OpenROAD PHYSICAL DESIGN
+
+***OpenROAD : Integrated Chip Physical Design Tool***
+
+OpenROAD is a comprehensive tool for integrated chip physical design, enabling a seamless transition from RTL to GDSII. It encompasses key stages of chip design, including synthesis, floorplanning, placement, routing, parasitic extraction, and timing analysis.
+
+Designed to minimize wire length using hierarchical placement algorithms, OpenROAD provides optimization features for both timing and power. Its modular architecture supports extensibility, allowing users to integrate custom algorithms and features.
+
+
+***OpenROAD Flow Controllers***
+
+The OpenROAD project offers two primary flow controllers:
+
+1. OpenROAD-flow-scripts (ORFS)
+ORFS is a flow controller that provides a collection of open-source tools for automated digital ASIC design, enabling a fully automated RTL-to-GDSII design flow. Key features include:
+
+Stages: Synthesis, Placement and Routing (PnR), Static Timing Analysis (STA), Design Rule Check (DRC), and Layout Versus Schematic (LVS).
+Flexibility: Supports customization, allowing users to combine and configure tools based on project needs.
+Physical Design Plugin: Integrates OpenROAD as a plugin for physical design, offering advanced features such as hierarchical placement, global routing, and detailed routing optimization.
+PDK Support: Compatible with several public and private PDKs (under NDA). Publicly available PDKs include GF180, Skywater130, and ASAP7.
+
+
+2. OpenLane
+OpenLane, developed by Efabless, is another automated RTL-to-GDSII flow similar to ORFS. It is tailored for the Skywater130 MPW Program.
+
+
+***High-Level ORFS Process (RTL to GDSII)***
+
+
+Below is a brief overview of the stages in the ORFS flow:
+
+1. Configuration
+Customize the framework to meet specific project requirements.
+Define design parameters such as the target technology node, constraints, and tool settings.
+2. Design Entry
+Input design files in formats like Verilog.
+Prepare design sources for further processing.
+3. Synthesis
+Convert RTL into a gate-level netlist using tools like Yosys and ABC.
+4. Floorplanning
+Determine the placement of design modules within the chip area.
+Tools: RePlAce, Capo.
+5. Placement
+Precisely position each gate or cell in the chip area.
+Tool: OpenROAD.
+6. Routing
+Connect gates and cells using metal wires to form a complete circuit.
+Tools: FastRoute, TritonRoute.
+7. Layout Verification
+Verify the correctness of the layout using tools like Magic.
+8. GDSII Generation
+Generate the final GDSII layout file using tools like Magic and KLayout.
+
+
+***Installation and setting up ORFS***
+
+
+***Clone and Install Dependencies***
+
+```
+mkdir OpeRoad
+cd OpenRoad
+git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts .
+sudo ./setup.sh
+```
+
+***Build***
+
+```
+./build_openroad.sh --local
+```
+
+***Verify Installation***
+
+```
+cd flow
+make
+make gui_final
+```
+
+![Screenshot 2024-11-24 212546](https://github.com/user-attachments/assets/0eaab0bb-aff7-455c-991a-add0ad3e4ed0)
+
+
+
+![Screenshot 2024-11-24 212613](https://github.com/user-attachments/assets/4380371a-91b7-41c6-a917-d21603c210c1)
+
+
+
+![Screenshot 2024-11-24 212710](https://github.com/user-attachments/assets/88c2288e-d5db-4e1d-942e-41214583c5f8)
+
+
+***Makefile***
+
+
+
+
+![Screenshot 2024-11-25 232457](https://github.com/user-attachments/assets/4eb63519-3a5b-4531-8806-57e7e64b6ec6)
+
+![Screenshot 2024-11-25 232509](https://github.com/user-attachments/assets/a1573744-24da-4224-9b57-6d59780823f9)
+
+
+![Screenshot 2024-11-25 232522](https://github.com/user-attachments/assets/73755fd7-fcc5-4201-9529-a1dc4645bb03)
+
+
+![Screenshot 2024-11-25 232531](https://github.com/user-attachments/assets/8c717b4a-406c-4f1e-a0dc-31cd7b2dfcdf)
+
+![Screenshot 2024-11-25 232552](https://github.com/user-attachments/assets/955b4155-eaa4-4504-8561-61a6c5218097)
+
+![Screenshot 2024-11-25 232610](https://github.com/user-attachments/assets/207e032e-72e3-44df-a159-e2b87510f079)
+
+
+![Screenshot 2024-11-25 232621](https://github.com/user-attachments/assets/96912af0-a0bb-4f7a-9656-122c546a4116)
+
+The designs library has different examples for RTL to GDS flow across different technology nodes.
+Platforms directory has different technology node libraries, lib files, GDS,etc. The ORFS automated flow has been defined inside the platforms directory
+
+Automated RTL2GDS Flow for VSDBabySoC:
+
+Initial Steps:
+
+We need to create a directory vsdbabysoc inside OpenROAD-flow-scripts/flow/designs/sky130hd
+Now create a directory vsdbabysoc inside OpenROAD-flow-scripts/flow/designs/src and include all the verilog files here.
+Now copy the folders gds, include, lef and lib from the VSDBabySoC folder in your system into this directory.
+The gds folder would contain the files avsddac.gds and avsdpll.gds
+The include folder would contain the files sandpiper.vh, sandpiper_gen.vh, sp_default.vh and sp_verilog.vh
+The gds folder would contain the files avsddac.lef and avsdpll.lef
+The lib folder would contain the files avsddac.lib and avsdpll.lib
+Now copy the constraints file(vsdbabysoc_synthesis.sdc) from the VSDBabySoC folder in your system into this directory.
+Now copy the files(macro.cfg and pin_order.cfg) from the VSDBabySoC folder in your system into this directory.
+
+Now, create a config.mk file whose contents are shown below:
+
+![Screenshot 2024-11-25 233810](https://github.com/user-attachments/assets/dcd89da8-69f8-4119-b3f0-f004f3751546)
+
+```
+export DESIGN_NICKNAME = vsdbabysoc
+export DESIGN_NAME = vsdbabysoc
+export PLATFORM    = sky130hd
+
+# export VERILOG_FILES_BLACKBOX = $(DESIGN_HOME)/src/$(DESIGN_NICKNAME)/IPs/*.v
+# export VERILOG_FILES = $(sort $(wildcard $(DESIGN_HOME)/src/$(DESIGN_NICKNAME)/*.v))
+# Explicitly list the Verilog files for synthesis
+export VERILOG_FILES = /home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc/src/vsdbabysoc.v \
+                       /home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc/src/module/rvmyth.v \
+                       /home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc/src/clk_gate.v
+
+export SDC_FILE      = /home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc/src/sdc/vsdbabysoc_synthesis.sdc
+
+#export DIE_AREA   = 0 0 1500 1500
+# export CORE_AREA  = 10 10 2910 3510
+
+# export PLACE_DENSITY ?= 0.23
+
+export vsdbabysoc_DIR = /home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc
+
+export VERILOG_INCLUDE_DIRS = /home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc/src/include
+
+# export SDC_FILE      = $(wildcard $(vsdbabysoc_DIR)/sdc/*.sdc)
+export ADDITIONAL_GDS  =/home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc/src/gds
+export ADDITIONAL_LEFS  = /home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc/src/lef
+
+export ADDITIONAL_LIBS = /home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc/src/lib/avsddac.lib \
+             /home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc/src/lib/avsdpll.lib
+# Clock Configuration (vsdbabysoc specific)
+# export CLOCK_PERIOD = 20.0
+export CLOCK_PORT = CLK
+export CLOCK_NET = $(CLOCK_PORT)
+
+# Floorplanning Configuration (vsdbabysoc specific)
+export FP_PIN_ORDER_CFG = /home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc/pin_order.cfg
+export FP_SIZING = absolute
+export DIE_AREA = 0 0 2000 2000
+export CORE_AREA = 10 10 1800 1800
+
+
+# export PL_RESIZER_HOLD_MAX_BUFFER_PERCENT = 80
+# export PL_RESIZER_HOLD_MAX_BUFFER_COUNT = 5000  # Set the buffer limit to a higher value if needed
+# export GLB_RESIZER_HOLD_MAX_BUFFER_PERCENT = 80
+
+# Hold Slack Margin Configuration
+# export PL_RESIZER_HOLD_SLACK_MARGIN = 0.01
+# export GLB_RESIZER_HOLD_SLACK_MARGIN = 0.01
+
+
+export BOTTOM_MARGIN_MULT = 50
+export TOP_MARGIN_MULT = 50
+export LEFT_MARGIN_MULT = 200
+export RIGHT_MARGIN_MULT = 200
+
+# Placement Configuration (vsdbabysoc specific)
+export MACRO_PLACEMENT_CFG = /home/vaibhav2000/OpenRoad/flow/designs/sky130hd/vsdbabysoc/macro.cfg
+
+# Magic Tool Configuration
+export MAGIC_ZEROIZE_ORIGIN = 0
+export MAGIC_EXT_USE_GDS = 1
+
+export SYNTH_HIERARCHICAL = 1
+
+# export RTLMP_BOUNDARY_WT = 0
+#  MACRO_PLACE_HALO = 100 100
+# export MACRO_PLACE_CHANNEL = 200 200
+
+# CTS tuning
+# export CTS_BUF_DISTANCE = 600
+# export SKIP_GATE_CLONING = 1
+
+# export SETUP_SLACK_MARGIN = 0.2
+
+# This is high, some SRAMs should probably be converted
+# to real SRAMs and not instantiated as flops
+# export SYNTH_MEMORY_MAX_BITS ?= 42000
+
+```
+
+***Commands for synthesis:***
+
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk synth
+```
+
+![Screenshot 2024-11-25 171819](https://github.com/user-attachments/assets/c7371235-1917-4f70-b8a2-ce5894529892)
+
+
+Synthesis netlist:
+
+
+![Screenshot 2024-11-25 154930](https://github.com/user-attachments/assets/f8166150-1a23-4119-977f-f05297d11af0)
+
+Synthesis log:
+
+
+![Screenshot 2024-11-25 155146](https://github.com/user-attachments/assets/bc38c2c7-2415-4e2d-b150-d28b205cd9c6)
+
+Synthesis Check:
+
+![Screenshot 2024-11-25 155234](https://github.com/user-attachments/assets/c3fa3af3-1e83-4468-a28b-d11931878192)
+
+Synthesis Stats:
+
+
+![Screenshot 2024-11-25 155255](https://github.com/user-attachments/assets/a40e2e44-b00e-4265-8980-faccf02e42f2)
+
+
+![Screenshot 2024-11-25 155355](https://github.com/user-attachments/assets/958f872a-2bde-498e-a5db-a41c0638c80a)
+
+
+![Screenshot 2024-11-25 155426](https://github.com/user-attachments/assets/04af2b0f-e667-49dd-92ef-b64f34690e61)
+
+
+Commands for floorplan:
+
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk floorplan
+```
+
+![Screenshot 2024-11-25 172031](https://github.com/user-attachments/assets/73ea3727-4c19-44fd-87a1-ab19d2209c4b)
+
+
+
+![Screenshot 2024-11-25 172116](https://github.com/user-attachments/assets/b9c4d18f-e2be-4882-8440-3ff2064a8275)
+
+
+![Screenshot 2024-11-25 173614](https://github.com/user-attachments/assets/1a439b3e-cc30-4a3d-a950-4fee5234d422)
+
+
+***OpenROAD GUI And Review Logs For Synthesis, Floorplan and Init STA***
+
+We use the below command and get the following result to observe the floorplanning
+
+```
+make gui_floorplan
+
+```
+
+![Screenshot 2024-11-25 173632](https://github.com/user-attachments/assets/99c6fdef-6fe5-4b88-8863-3dcbb1edc0b2)
+
+
+![Screenshot 2024-11-25 173657](https://github.com/user-attachments/assets/0021f0dc-9bd4-48c6-bafb-70764bd0cbbf)
+
+The command to see the floorplanning is as follows and we get the following layout
+
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk gui_floorplan
+```
+
+
+![Screenshot 2024-11-25 235907](https://github.com/user-attachments/assets/7d700690-2a37-42cc-af74-f48b0a39634c)
+
+
+![Screenshot 2024-11-25 174956](https://github.com/user-attachments/assets/d0c90195-8fa1-4177-8aeb-c8550c3aa8ec)
+
 
 
 
