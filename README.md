@@ -1,4 +1,4 @@
-# ASIC DESIGN CLASS LABS
+![image](https://github.com/user-attachments/assets/9ac83546-2f8b-4f59-92d7-d4e84f31d431)# ASIC DESIGN CLASS LABS
 
 <details>
  <summary> TASK-1 </summary>
@@ -4689,13 +4689,6 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config_2.mk gui_floorplan
 ![Screenshot 2024-11-26 043026](https://github.com/user-attachments/assets/137686c3-cdee-4873-9ad0-54ed31870d26)
 
 
-Floorplan_Log
-
-
-
-
-
-
 
 
 
@@ -4801,7 +4794,218 @@ make gui_place
 ![Screenshot 2024-11-26 001728](https://github.com/user-attachments/assets/3d0c20c8-cfea-49a5-a7ff-ae681727d6f7)
 
 
-![Screenshot 2024-11-26 001814](https://github.com/user-attachments/assets/fc19ccc2-15fa-41ad-9f54-54c875befd2d)
+![Screenshot 2024-11-26 051500](https://github.com/user-attachments/assets/61e84dad-3b65-451e-9709-c55a766d98e3)
+
+```
+
+
+==========================================================================
+detailed place report_tns
+--------------------------------------------------------------------------
+tns 0.00
+
+==========================================================================
+detailed place report_wns
+--------------------------------------------------------------------------
+wns 0.00
+
+==========================================================================
+detailed place report_worst_slack
+--------------------------------------------------------------------------
+worst slack INF
+
+==========================================================================
+detailed place report_checks -path_delay min
+--------------------------------------------------------------------------
+No paths found.
+
+==========================================================================
+detailed place report_checks -path_delay max
+--------------------------------------------------------------------------
+No paths found.
+
+==========================================================================
+detailed place report_checks -unconstrained
+--------------------------------------------------------------------------
+Startpoint: core.CPU_valid_taken_br_a4$_DFF_P_ (rising edge-triggered flip-flop)
+Endpoint: core.CPU_Xreg_value_a4[15][18]$_SDFFE_PP0P_
+          (rising edge-triggered flip-flop)
+Path Group: unconstrained
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.76    0.00    0.00 ^ core.CPU_valid_taken_br_a4$_DFF_P_/CLK (sky130_fd_sc_hd__dfxtp_1)
+     2    0.01    0.04    0.46    0.46 v core.CPU_valid_taken_br_a4$_DFF_P_/Q (sky130_fd_sc_hd__dfxtp_1)
+                                         core.CPU_valid_taken_br_a4 (net)
+                  0.04    0.00    0.46 v _07913_/B (sky130_fd_sc_hd__or4_4)
+    41    0.23    0.36    0.84    1.30 v _07913_/X (sky130_fd_sc_hd__or4_4)
+                                         _02930_ (net)
+                  0.36    0.02    1.31 v load_slew103/A (sky130_fd_sc_hd__buf_16)
+    36    0.28    0.15    0.35    1.66 v load_slew103/X (sky130_fd_sc_hd__buf_16)
+                                         net103 (net)
+                  0.15    0.01    1.68 v max_cap102/A (sky130_fd_sc_hd__buf_16)
+    24    0.27    0.14    0.26    1.94 v max_cap102/X (sky130_fd_sc_hd__buf_16)
+                                         net102 (net)
+                  0.16    0.04    1.97 v _07915_/A (sky130_fd_sc_hd__clkinv_16)
+    43    0.48    0.31    0.25    2.22 ^ _07915_/Y (sky130_fd_sc_hd__clkinv_16)
+                                         _02932_ (net)
+                  0.37    0.11    2.33 ^ _09981_/C (sky130_fd_sc_hd__nor3_2)
+     2    0.02    0.10    0.13    2.46 v _09981_/Y (sky130_fd_sc_hd__nor3_2)
+                                         _04371_ (net)
+                  0.10    0.00    2.46 v _09982_/B1 (sky130_fd_sc_hd__a21oi_4)
+     6    0.10    0.69    0.57    3.02 ^ _09982_/Y (sky130_fd_sc_hd__a21oi_4)
+                                         _04372_ (net)
+                  0.69    0.00    3.02 ^ _09988_/A2 (sky130_fd_sc_hd__o21ai_4)
+    16    0.12    0.32    0.36    3.39 v _09988_/Y (sky130_fd_sc_hd__o21ai_4)
+                                         _04378_ (net)
+                  0.32    0.00    3.39 v _11217_/A (sky130_fd_sc_hd__nor3_4)
+    14    0.11    1.07    0.96    4.35 ^ _11217_/Y (sky130_fd_sc_hd__nor3_4)
+                                         _05443_ (net)
+                  1.07    0.00    4.35 ^ wire20/A (sky130_fd_sc_hd__buf_8)
+    10    0.11    0.19    0.30    4.65 ^ wire20/X (sky130_fd_sc_hd__buf_8)
+                                         net20 (net)
+                  0.20    0.01    4.66 ^ _11238_/B (sky130_fd_sc_hd__nand2_4)
+     5    0.04    0.22    0.13    4.79 v _11238_/Y (sky130_fd_sc_hd__nand2_4)
+                                         _05460_ (net)
+                  0.22    0.00    4.79 v _11253_/B1 (sky130_fd_sc_hd__o221ai_1)
+     1    0.00    0.23    0.23    5.02 ^ _11253_/Y (sky130_fd_sc_hd__o221ai_1)
+                                         _00713_ (net)
+                  0.23    0.00    5.02 ^ core.CPU_Xreg_value_a4[15][18]$_SDFFE_PP0P_/D (sky130_fd_sc_hd__dfxtp_1)
+                                  5.02   data arrival time
+-----------------------------------------------------------------------------
+(Path is unconstrained)
+
+
+
+==========================================================================
+detailed place report_check_types -max_slew -max_cap -max_fanout -violators
+--------------------------------------------------------------------------
+
+==========================================================================
+detailed place max_slew_check_slack
+--------------------------------------------------------------------------
+0.06809719651937485
+
+==========================================================================
+detailed place max_slew_check_limit
+--------------------------------------------------------------------------
+1.4951549768447876
+
+==========================================================================
+detailed place max_slew_check_slack_limit
+--------------------------------------------------------------------------
+0.0455
+
+==========================================================================
+detailed place max_fanout_check_slack
+--------------------------------------------------------------------------
+1.0000000150474662e+30
+
+==========================================================================
+detailed place max_fanout_check_limit
+--------------------------------------------------------------------------
+1.0000000150474662e+30
+
+==========================================================================
+detailed place max_capacitance_check_slack
+--------------------------------------------------------------------------
+0.007044170051813126
+
+==========================================================================
+detailed place max_capacitance_check_limit
+--------------------------------------------------------------------------
+0.19410200417041779
+
+==========================================================================
+detailed place max_capacitance_check_slack_limit
+--------------------------------------------------------------------------
+0.0363
+
+==========================================================================
+detailed place max_slew_violation_count
+--------------------------------------------------------------------------
+max slew violation count 0
+
+==========================================================================
+detailed place max_fanout_violation_count
+--------------------------------------------------------------------------
+max fanout violation count 0
+
+==========================================================================
+detailed place max_cap_violation_count
+--------------------------------------------------------------------------
+max cap violation count 0
+
+==========================================================================
+detailed place setup_violation_count
+--------------------------------------------------------------------------
+setup violation count 0
+
+==========================================================================
+detailed place hold_violation_count
+--------------------------------------------------------------------------
+hold violation count 0
+
+==========================================================================
+detailed place report_checks -path_delay max reg to reg
+--------------------------------------------------------------------------
+No paths found.
+
+==========================================================================
+detailed place report_checks -path_delay min reg to reg
+--------------------------------------------------------------------------
+No paths found.
+
+==========================================================================
+detailed place critical path target clock latency max path
+--------------------------------------------------------------------------
+0
+
+==========================================================================
+detailed place critical path target clock latency min path
+--------------------------------------------------------------------------
+0
+
+==========================================================================
+detailed place critical path source clock latency min path
+--------------------------------------------------------------------------
+0
+
+==========================================================================
+detailed place critical path delay
+--------------------------------------------------------------------------
+-1
+
+==========================================================================
+detailed place critical path slack
+--------------------------------------------------------------------------
+0
+
+==========================================================================
+detailed place slack div critical path delay
+--------------------------------------------------------------------------
+0.000000
+
+==========================================================================
+detailed place report_power
+--------------------------------------------------------------------------
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             9.16e-12   1.10e-11   1.45e-08   1.46e-08  49.9%
+Combinational          1.89e-11   4.94e-11   1.46e-08   1.46e-08  50.1%
+Clock                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Macro                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+----------------------------------------------------------------
+Total                  2.80e-11   6.04e-11   2.91e-08   2.92e-08 100.0%
+                           0.1%       0.2%      99.7%
+
+```
+
+
+
 
 CTS Command
 
@@ -4809,10 +5013,9 @@ CTS Command
 make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config_2.mk cts
 ```
 
+![Screenshot 2024-11-26 051831](https://github.com/user-attachments/assets/a21cf9ae-ee17-4bad-b430-dd51f8029f38)
 
-![Screenshot 2024-11-26 002047](https://github.com/user-attachments/assets/f8f85d68-3790-4a18-a275-d023ea3c085d)
 
-![Screenshot 2024-11-26 002100](https://github.com/user-attachments/assets/602f6fbd-3163-45b1-80cb-8e82a2ba172f)
 
 ```
 make gui_cts
@@ -4821,16 +5024,8 @@ make gui_cts
 ![Screenshot 2024-11-26 002130](https://github.com/user-attachments/assets/65e9575e-383d-40cf-a0ff-822aef0d7336)
 
 
-![Screenshot 2024-11-26 002142](https://github.com/user-attachments/assets/871482cc-5a79-4bf3-98e8-1ce8e6bb3ae0)
 
-
-![Screenshot 2024-11-26 002415](https://github.com/user-attachments/assets/bd52bc2d-8bac-43a8-99ca-68e36227d9ce)
-
-
-![Screenshot 2024-11-26 002635](https://github.com/user-attachments/assets/fe254837-93f2-4433-8f81-08fcd93c22fe)
-
-
-![Screenshot 2024-11-26 002707](https://github.com/user-attachments/assets/038ec344-ea3c-4c4a-a388-da3441033f57)
+![Screenshot 2024-11-26 052318](https://github.com/user-attachments/assets/5cc4bcd8-afab-4a06-8ffe-0f27e87769da)
 
 
 For Route
