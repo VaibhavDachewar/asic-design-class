@@ -4377,7 +4377,7 @@ Screenshots of commands run and timing report generated
 <details>
  <summary>TASK-13 </summary>
 
-#OpenROAD PHYSICAL DESIGN
+# OpenROAD PHYSICAL DESIGN
 
 ***OpenROAD : Integrated Chip Physical Design Tool***
 
@@ -4603,7 +4603,8 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config_2.mk synth
 Synthesis netlist:
 
 
-![Screenshot 2024-11-26 015013](https://github.com/user-attachments/assets/18c933e3-0946-4c70-b381-98c7addf2d8c)
+![Screenshot 2024-11-26 021841](https://github.com/user-attachments/assets/39cafccf-c209-4eaf-8b28-64587f3a4efd)
+
 
 
 Synthesis log:
