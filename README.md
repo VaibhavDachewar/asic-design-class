@@ -4594,7 +4594,7 @@ export SYNTH_HIERARCHICAL = 1
 ***Commands for synthesis:***
 
 ```
-make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk synth
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config_2.mk synth
 ```
 
 ![Screenshot 2024-11-25 171819](https://github.com/user-attachments/assets/c7371235-1917-4f70-b8a2-ce5894529892)
@@ -4629,7 +4629,7 @@ Synthesis Stats:
 Commands for floorplan:
 
 ```
-make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk floorplan
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config_2.mk floorplan
 ```
 
 ![Screenshot 2024-11-25 172031](https://github.com/user-attachments/assets/73ea3727-4c19-44fd-87a1-ab19d2209c4b)
@@ -4659,14 +4659,77 @@ make gui_floorplan
 The command to see the floorplanning is as follows and we get the following layout
 
 ```
-make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk gui_floorplan
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config_2.mk gui_floorplan
 ```
+
+
+![Screenshot 2024-11-25 174937](https://github.com/user-attachments/assets/7d225fb7-b17b-478c-b162-a8a64ace0689)
+
 
 
 ![Screenshot 2024-11-25 235907](https://github.com/user-attachments/assets/7d700690-2a37-42cc-af74-f48b0a39634c)
 
 
 ![Screenshot 2024-11-25 174956](https://github.com/user-attachments/assets/d0c90195-8fa1-4177-8aeb-c8550c3aa8ec)
+
+#For Placement
+
+```
+
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config_2.mk place
+
+```
+
+
+![Screenshot 2024-11-26 001058](https://github.com/user-attachments/assets/baeea49c-0a01-42bd-b12c-c11225ed8457)
+
+
+
+![Screenshot 2024-11-26 001657](https://github.com/user-attachments/assets/9fb6f621-016d-4d0f-99d6-5d731a09c5ab)
+
+
+```
+make gui_place
+```
+
+![Screenshot 2024-11-26 001728](https://github.com/user-attachments/assets/3d0c20c8-cfea-49a5-a7ff-ae681727d6f7)
+
+
+![Screenshot 2024-11-26 001814](https://github.com/user-attachments/assets/fc19ccc2-15fa-41ad-9f54-54c875befd2d)
+
+CTS Command
+
+```
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config_2.mk cts
+```
+
+
+![Screenshot 2024-11-26 002047](https://github.com/user-attachments/assets/f8f85d68-3790-4a18-a275-d023ea3c085d)
+
+![Screenshot 2024-11-26 002100](https://github.com/user-attachments/assets/602f6fbd-3163-45b1-80cb-8e82a2ba172f)
+
+```
+make gui_cts
+```
+
+![Screenshot 2024-11-26 002130](https://github.com/user-attachments/assets/65e9575e-383d-40cf-a0ff-822aef0d7336)
+
+
+![Screenshot 2024-11-26 002142](https://github.com/user-attachments/assets/871482cc-5a79-4bf3-98e8-1ce8e6bb3ae0)
+
+
+![Screenshot 2024-11-26 002415](https://github.com/user-attachments/assets/bd52bc2d-8bac-43a8-99ca-68e36227d9ce)
+
+
+![Screenshot 2024-11-26 002635](https://github.com/user-attachments/assets/fe254837-93f2-4433-8f81-08fcd93c22fe)
+
+
+![Screenshot 2024-11-26 002707](https://github.com/user-attachments/assets/038ec344-ea3c-4c4a-a388-da3441033f57)
+
+
+
+
+
 
 
 
