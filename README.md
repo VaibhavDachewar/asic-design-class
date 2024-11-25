@@ -4614,18 +4614,20 @@ Synthesis log:
 
 Synthesis Check:
 
-![Screenshot 2024-11-25 155234](https://github.com/user-attachments/assets/c3fa3af3-1e83-4468-a28b-d11931878192)
+![Screenshot 2024-11-26 045001](https://github.com/user-attachments/assets/165e26a5-5354-4f9c-80fa-e23bba2ac74f)
+
 
 Synthesis Stats:
 
 
-![Screenshot 2024-11-25 155255](https://github.com/user-attachments/assets/a40e2e44-b00e-4265-8980-faccf02e42f2)
+![Screenshot 2024-11-26 044521](https://github.com/user-attachments/assets/e337d3e2-7ef0-42b9-94bb-66b32b0bd834)
 
 
-![Screenshot 2024-11-25 155355](https://github.com/user-attachments/assets/958f872a-2bde-498e-a5db-a41c0638c80a)
 
+![Screenshot 2024-11-26 044609](https://github.com/user-attachments/assets/33099688-2f91-4f1c-84eb-5c6161dbdcb1)
 
-![Screenshot 2024-11-25 155426](https://github.com/user-attachments/assets/04af2b0f-e667-49dd-92ef-b64f34690e61)
+![Screenshot 2024-11-26 044636](https://github.com/user-attachments/assets/19fee150-776f-4235-91fd-ba4f3fb543ec)
+
 
 
 Commands for floorplan:
@@ -4676,7 +4678,105 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config_2.mk gui_floorplan
 ![Screenshot 2024-11-26 040704](https://github.com/user-attachments/assets/e104cf54-51b1-4852-a0a8-d715386e7bf0)
 
 
+![Screenshot 2024-11-26 042852](https://github.com/user-attachments/assets/e4ea2675-9cf6-44d8-a7a4-6097bc3c3c24)
 
+![Screenshot 2024-11-26 042914](https://github.com/user-attachments/assets/5aad399d-1743-4b16-959a-40fd9cb27c1a)
+
+
+![Screenshot 2024-11-26 043004](https://github.com/user-attachments/assets/f5be8a13-a929-43f0-b502-c684aec816b3)
+
+
+![Screenshot 2024-11-26 043026](https://github.com/user-attachments/assets/137686c3-cdee-4873-9ad0-54ed31870d26)
+
+
+Floorplan_Log
+
+
+
+
+
+
+
+
+
+***FLOORPLAN TIMING REPORT***
+
+
+![Screenshot 2024-11-26 044155](https://github.com/user-attachments/assets/c738a011-19a0-4632-a6f3-2eb1ef36d6c4)
+
+```
+
+==========================================================================
+floorplan final report_tns
+--------------------------------------------------------------------------
+tns 0.00
+
+==========================================================================
+floorplan final report_wns
+--------------------------------------------------------------------------
+wns 0.00
+
+==========================================================================
+floorplan final report_worst_slack
+--------------------------------------------------------------------------
+worst slack INF
+
+==========================================================================
+floorplan final report_checks -path_delay min
+--------------------------------------------------------------------------
+No paths found.
+
+==========================================================================
+floorplan final report_checks -path_delay max
+--------------------------------------------------------------------------
+No paths found.
+
+==========================================================================
+floorplan final report_checks -unconstrained
+--------------------------------------------------------------------------
+Startpoint: core.CPU_reset_a3$_DFF_P_ (rising edge-triggered flip-flop)
+Endpoint: core.CPU_Xreg_value_a4[10][13]$_SDFFE_PP0P_
+          (rising edge-triggered flip-flop)
+Path Group: unconstrained
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00 ^ core.CPU_reset_a3$_DFF_P_/CLK (sky130_fd_sc_hd__dfxtp_1)
+   591    1.46   13.42    9.67    9.67 ^ core.CPU_reset_a3$_DFF_P_/Q (sky130_fd_sc_hd__dfxtp_1)
+                                         core.CPU_reset_a3 (net)
+                 13.42    0.00    9.67 ^ _10124_/A (sky130_fd_sc_hd__inv_1)
+   464    1.04    0.00   21.17   30.85 v _10124_/Y (sky130_fd_sc_hd__inv_1)
+                                         _04513_ (net)
+                  0.00    0.00   30.85 v _10227_/A (sky130_fd_sc_hd__nand3_1)
+    31    0.08    0.78    0.52   31.37 ^ _10227_/Y (sky130_fd_sc_hd__nand3_1)
+                                         _04613_ (net)
+                  0.78    0.00   31.37 ^ _10232_/B1 (sky130_fd_sc_hd__o221ai_1)
+     1    0.00    0.20    0.22   31.59 v _10232_/Y (sky130_fd_sc_hd__o221ai_1)
+                                         _00548_ (net)
+                  0.20    0.00   31.59 v core.CPU_Xreg_value_a4[10][13]$_SDFFE_PP0P_/D (sky130_fd_sc_hd__dfxtp_1)
+                                 31.59   data arrival time
+-----------------------------------------------------------------------------
+(Path is unconstrained)
+
+
+
+==========================================================================
+floorplan final report_power
+--------------------------------------------------------------------------
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             7.92e-12   3.67e-12   1.45e-08   1.45e-08  58.0%
+Combinational          1.01e-11   1.77e-11   1.04e-08   1.05e-08  42.0%
+Clock                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Macro                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+----------------------------------------------------------------
+Total                  1.80e-11   2.13e-11   2.49e-08   2.49e-08 100.0%
+                           0.1%       0.1%      99.8%
+
+```
 
 #For Placement
 
