@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/9ac83546-2f8b-4f59-92d7-d4e84f31d431)# ASIC DESIGN CLASS LABS
+# ASIC DESIGN CLASS LABS
 
 <details>
  <summary> TASK-1 </summary>
