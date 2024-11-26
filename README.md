@@ -4657,8 +4657,9 @@ make gui_floorplan
 
 ![Screenshot 2024-11-25 173632](https://github.com/user-attachments/assets/99c6fdef-6fe5-4b88-8863-3dcbb1edc0b2)
 
+![Screenshot 2024-11-26 122037](https://github.com/user-attachments/assets/d2856c64-2234-4c66-9baa-974fde8c2e7e)
 
-![Screenshot 2024-11-25 173657](https://github.com/user-attachments/assets/0021f0dc-9bd4-48c6-bafb-70764bd0cbbf)
+
 
 The command to see the floorplanning is as follows and we get the following layout
 
@@ -4796,7 +4797,9 @@ make gui_place
 
 ![Screenshot 2024-11-26 051500](https://github.com/user-attachments/assets/61e84dad-3b65-451e-9709-c55a766d98e3)
 
+
 ```
+
 
 
 ==========================================================================
@@ -5071,11 +5074,32 @@ make gui_final
 
 
 
+Heatmap for vsdbabysoc -
 
 
+![Screenshot 2024-11-26 123824](https://github.com/user-attachments/assets/2d342aaf-46b2-4093-bc02-bf9a21639411)
+
+***Placement***
+
+![Screenshot 2024-11-26 124055](https://github.com/user-attachments/assets/4e6469c0-325d-4db6-b0ca-c23a929baea6)
+
+***Power***
+
+![Screenshot 2024-11-26 124556](https://github.com/user-attachments/assets/2111b8fb-9bcc-47dc-a0ad-ba97db7e2473)
+
+***Routing congestion***
+
+![Screenshot 2024-11-26 124736](https://github.com/user-attachments/assets/d2af60b2-2f3e-4b74-a9a9-114942fd50d7)
+
+***Estimated congestion***
+
+![Screenshot 2024-11-26 124809](https://github.com/user-attachments/assets/eceec0f1-208e-41a4-b39b-5c1815afd4aa)
 
 
+***IR Drop***
 
+
+![Screenshot 2024-11-26 124917](https://github.com/user-attachments/assets/6ed46db1-a791-4c25-8f01-828913dcbd12)
 
 
 
