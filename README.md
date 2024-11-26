@@ -5101,6 +5101,17 @@ Heatmap for vsdbabysoc -
 
 ![Screenshot 2024-11-26 124917](https://github.com/user-attachments/assets/6ed46db1-a791-4c25-8f01-828913dcbd12)
 
+***QOR Report***
+
+
+![Screenshot 2024-11-26 133322](https://github.com/user-attachments/assets/8d2a1c20-8bc4-4a55-81d9-aefbc994b40a)
+
+
+![Screenshot 2024-11-26 133340](https://github.com/user-attachments/assets/f19377c4-b260-4d64-87b5-297916602960)
+
+
+
+
 
 
 
